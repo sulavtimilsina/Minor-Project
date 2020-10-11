@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/phoenix/Documents/Flutter/helloflutter/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
+            "outputFile": "/media/phoenix/Shared Drive/Minor Project/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
             "map": [
                 {
-                    "source": "/home/phoenix/Documents/Flutter/helloflutter/android/app/src/main/res/values/styles.xml",
+                    "source": "/media/phoenix/Shared Drive/Minor Project/android/app/src/main/res/values/styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

@@ -19,14 +19,14 @@ var upload = multer({storage:storage});
 
 /* GET users listing. */
 router.get('/', async (req, res, next)=> {
-  let user =await User.find({});
-
-  res.send(user);
+  let users =await User.find({});
+  console.log(users);
+  res.send(users);
 });
 
 //register user
 router.post("/",async (req,res,next)=>{
-  console.log(req.body);
+  
 
   //validate the request body first
   const {error} = validate(req.body);
@@ -103,6 +103,7 @@ router.post('/login', async (req,res,next)=>{
   });
 
 });
+
 
 //upload profile image saperately
 // router.get('/profileImage/:id',async(req,res,next)=>{

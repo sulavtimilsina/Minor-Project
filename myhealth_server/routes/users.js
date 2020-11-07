@@ -8,6 +8,7 @@ const Joi = require('@hapi/joi');
 var multer = require('multer');
 const storage = multer.diskStorage({
     destination:function(req,file,cb) {
+      console.log(file);
         cb(null,'./public/images');
     },
     filename:function(req,file,cb) {
@@ -103,6 +104,12 @@ router.post('/login', async (req,res,next)=>{
   });
 
 });
+router.get('/speciality/:speciality', async (req, res, next)=> {
+  let speciality = req.params.speciality;
+  let users =await User.find({userType:speciality});
+  console.log(users);
+  res.send(users);
+});
 
 
 //upload profile image saperately
@@ -113,15 +120,14 @@ router.post('/login', async (req,res,next)=>{
 //     profileImage:user.profileImage
 //   });
 // });
-// router.post('/profileImage/:id',upload.single("profileImage"),async(req,res,next)=>{
-//   let userId = req.params.id
-//   let user = await User.findById({_id:userId});
+router.post('/profileImage',upload.single("profileImage"),async(req,res,next)=>{
+  //console.log(req)
+  // let userId = req.params.id
+  // let user = await User.findById({_id:userId});
 
 
-//   res.send({
-//     profileImage:user.profileImage
-//   });
-// });
+  res.send("file saved");
+});
 
 //function to validate user
 function validateUser(req){

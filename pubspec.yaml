@@ -27,6 +27,10 @@ dependencies:
   http: ^0.12.2
   group_radio_button: ^1.0.1
   flutter_secure_storage: ^3.3.5
+  image_picker: ^0.6.7+12
+  progress_dialog: ^1.2.4
+  mime: ^0.9.7
+  intl: ^0.16.1
 
 
   # The following adds the Cupertino Icons font to your application.

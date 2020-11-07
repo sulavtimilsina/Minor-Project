@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:convert';
 import './register_screen.dart';
 import '../models/user_model.dart';
 import 'package:http/http.dart' as http;
 import './patient/home_screen.dart';
-import './doctor//home_screen.dart';
+import 'doctor/tabs.dart';
+
 
 Future<User> createUser(String email, String password) async {
   final http.Response response = await http.post(
@@ -19,10 +21,10 @@ Future<User> createUser(String email, String password) async {
   //print("this is response");
   //print(response.headers['x-auth-token']);
   if (response.statusCode == 200) {
-    //print(response.headers['x-auth-token']);
+    print(response.headers['x-auth-token']);
 
-    // final storage = new FlutterSecureStorage();
-    // await storage.write(key: "x-auth-token", value: response.headers);
+    final storage = new FlutterSecureStorage();
+    await storage.write(key: "x-auth-token", value: response.headers['x-auth-token']);
     final user = User.fromJson(jsonDecode(response.body));
     //print(user.id);
     return user;
@@ -226,7 +228,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => DoctorHome()));
+                              builder: (context) => TabsPage()));
                                });
                     }
                     return Text(snapshot.data.username);

@@ -1,13 +1,14 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:helloflutter/screens/doctor/information_screen.dart';
 
 import '../models/user_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:group_radio_button/group_radio_button.dart';
-//import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
 import './patient/home_screen.dart';
-import './doctor//home_screen.dart';
+
 
 Future<User> createUser(
     String username, String email, String password, String userType) async {
@@ -221,7 +222,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => DoctorHome()));
+                              builder: (context) => Info()));
                                });
                     }
                     //return Text(snapshot.data.username);

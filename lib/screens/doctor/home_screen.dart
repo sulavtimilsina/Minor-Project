@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:helloflutter/screens/doctor/information_screen.dart';
 
 class DoctorHome extends StatefulWidget {
+    static Route<dynamic> route() => MaterialPageRoute(
+        builder: (context) => DoctorHome(),
+      );
+
   @override
   _DoctorHomeState createState() => _DoctorHomeState();
 }
@@ -24,8 +29,19 @@ class _DoctorHomeState extends State<DoctorHome> {
         title: Text("My Health"),
         actions: [IconButton(icon: Icon(Icons.add_a_photo), onPressed: null)],
       ),
-      body: Container(
-        child: Text("You are a Doctor"),
+      body: Column(
+        children: [
+          Text('You are a doctor'),
+          SizedBox(height: 10),
+          FlatButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Info()),
+                );
+              },
+              child: Text("Add Data"))
+        ],
       ),
     );
   }

@@ -3,6 +3,7 @@ var router = express.Router();
 const bcrypt = require("bcrypt");
 const { User, validate } = require("../models/user");
 const Joi = require('@hapi/joi');
+const auth = require('../middleware/auth');
 
 
 var multer = require('multer');
@@ -103,6 +104,15 @@ router.post('/login', async (req,res,next)=>{
     userType:user.userType
   });
 
+});
+
+//get all the doctors 
+router.get('/doctors',auth, async (req, res, next)=> {
+  let userId = req.user._id;
+  console.log(userId);
+  let users =await User.find({userType:"doctor"});
+  console.log(users);
+  res.send(users);
 });
 router.get('/speciality/:speciality', async (req, res, next)=> {
   let speciality = req.params.speciality;

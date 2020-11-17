@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:helloflutter/screens/doctor/tabs.dart';
 import 'dart:convert';
 import './register_screen.dart';
 import '../models/user_model.dart';
 import 'package:http/http.dart' as http;
 import './patient/home_screen.dart';
-import 'doctor/tabs.dart';
+//import 'doctor/tabs.dart';
 
 
 Future<User> createUser(String email, String password) async {
@@ -161,7 +162,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         _email.text,
                                         _password.text,
                                       );
-                                      if (isLoggedin == true) {}
+                                      //if (isLoggedin == true) {}
                                     });
                                   },
                                   child: Text(

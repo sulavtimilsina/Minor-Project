@@ -31,6 +31,8 @@ dependencies:
   progress_dialog: ^1.2.4
   mime: ^0.9.7
   intl: ^0.16.1
+  percent_indicator: ^2.1.8
+
 
 
   # The following adds the Cupertino Icons font to your application.

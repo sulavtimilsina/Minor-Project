@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:helloflutter/screens/doctor/home_screen.dart';
+import 'package:helloflutter/screens/doctor/schedule_screen.dart';
 import 'package:helloflutter/screens/doctor/search_page.dart';
 
 class TabNavigationItem {
@@ -25,6 +26,11 @@ class TabNavigationItem {
           page: SearchPage(),
           icon: Icon(Icons.search),
           title: Text("Search"),
+        ),
+        TabNavigationItem(
+          page: HomePage(),
+          icon: Icon(Icons.schedule),
+          title: Text("Schedule"),
         ),
       ];
 }

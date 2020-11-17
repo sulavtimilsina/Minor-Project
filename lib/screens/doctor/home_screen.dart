@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:helloflutter/screens/doctor/information_screen.dart';
+import 'package:helloflutter/screens/login_screen.dart';
 
 class DoctorHome extends StatefulWidget {
-    static Route<dynamic> route() => MaterialPageRoute(
+  static Route<dynamic> route() => MaterialPageRoute(
         builder: (context) => DoctorHome(),
       );
 
@@ -11,6 +13,13 @@ class DoctorHome extends StatefulWidget {
 }
 
 class _DoctorHomeState extends State<DoctorHome> {
+  logout() async {
+    final storage = new FlutterSecureStorage();
+    await storage.delete(key: "x-auth-token");
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => LoginScreen()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +29,7 @@ class _DoctorHomeState extends State<DoctorHome> {
             return IconButton(
               icon: const Icon(Icons.menu),
               onPressed: () {
-                Navigator.pop(context);
+                logout();
               },
               tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
             );

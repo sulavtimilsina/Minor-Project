@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:helloflutter/screens/doctor/information_screen.dart';
 
 import '../models/user_model.dart';
@@ -9,9 +10,11 @@ import 'package:group_radio_button/group_radio_button.dart';
 
 import './patient/home_screen.dart';
 
-
 Future<User> createUser(
     String username, String email, String password, String userType) async {
+  print(username);
+  print(email);
+  print(userType);
   final http.Response response = await http.post('http://10.0.2.2:3000/users',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8'
@@ -22,13 +25,12 @@ Future<User> createUser(
         'password': password,
         'userType': userType
       }));
-  //print("this is response");
-  //print(response.headers['x-auth-token']);
-  if (response.statusCode == 200) {
-    //print(response.headers['x-auth-token']);
 
-    // final storage = new FlutterSecureStorage();
-    // await storage.write(key: "x-auth-token", value: response.headers);
+  if (response.statusCode == 200) {
+    print(response.headers['x-auth-token']);
+
+    final storage = new FlutterSecureStorage();
+    await storage.write(key: "x-auth-token", value: response.headers['x-auth-token']);
     final user = User.fromJson(jsonDecode(response.body));
     //print(user.id);
     return user;
@@ -210,7 +212,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     print(snapshot.data.userType);
-            if (snapshot.data.userType == 'patient') {
+                    if (snapshot.data.userType == 'patient') {
                       Future.delayed(Duration.zero, () {
                         Navigator.pushReplacement(
                             context,
@@ -219,11 +221,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       });
                     } else {
                       Future.delayed(Duration.zero, () {
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Info()));
-                               });
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (context) => Info()));
+                      });
                     }
                     //return Text(snapshot.data.username);
                   } else if (snapshot.hasError) {

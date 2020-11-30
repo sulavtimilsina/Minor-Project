@@ -149,7 +149,6 @@ class _InfoState extends State<Info> {
                             },
                           ),
 
-
 //===========================================================================================================dropdown
                           Container(
                             width: MediaQuery.of(context).size.width * 0.96,

@@ -181,28 +181,26 @@ class _HomePageState extends State<HomePage> {
                                 if (snapshot.hasData) {
                                   print(snapshot.data);
                                   return ListView.builder(
-                                    shrinkWrap: true,
-                                    physics: NeverScrollableScrollPhysics(),
+                                      shrinkWrap: true,
+                                      physics: NeverScrollableScrollPhysics(),
                                       itemCount: snapshot.data.length,
                                       itemBuilder:
                                           (BuildContext context, int index) {
-                                            print(snapshot.data[index].startTime);
-                                        return   TaskContainer(
-                                          
-                                        title: snapshot.data[index].startTime,
-                                        subtitle:
-                                            snapshot.data[index].endTime,
-                                        boxColor: LightColors.kLightYellow2,
-                                      );
+                                        print(snapshot.data[index].startTime);
+                                        return TaskContainer(
+                                          title: snapshot.data[index].startTime,
+                                          subtitle:
+                                              snapshot.data[index].endTime,
+                                          boxColor: LightColors.kLightYellow2,
+                                        );
                                       });
-                                } else{
+                                } else {
                                   return Expanded(
-                                    child: Text("snapshot.error")
-                                    );
+                                      child: Text("snapshot.error"));
                                 }
 
                                 // By default, show a loading spinner.
-                               // return CircularProgressIndicator();
+                                // return CircularProgressIndicator();
                               },
                             ))
                       ],

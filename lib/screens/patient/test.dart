@@ -16,7 +16,6 @@ class _TestState extends State<Test> {
   Widget build(BuildContext context) {
     return Container(
       child: Text(widget.todo.speciality),
-      
     );
   }
 }

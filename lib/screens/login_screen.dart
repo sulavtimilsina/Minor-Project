@@ -8,7 +8,6 @@ import 'package:http/http.dart' as http;
 import './patient/home_screen.dart';
 //import 'doctor/tabs.dart';
 
-
 Future<User> createUser(String email, String password) async {
   final http.Response response = await http.post(
       'http://10.0.2.2:3000/users/login',
@@ -25,7 +24,8 @@ Future<User> createUser(String email, String password) async {
     print(response.headers['x-auth-token']);
 
     final storage = new FlutterSecureStorage();
-    await storage.write(key: "x-auth-token", value: response.headers['x-auth-token']);
+    await storage.write(
+        key: "x-auth-token", value: response.headers['x-auth-token']);
     final user = User.fromJson(jsonDecode(response.body));
     //print(user.id);
     return user;
@@ -226,11 +226,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       });
                     } else {
                       Future.delayed(Duration.zero, () {
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => TabsPage()));
-                               });
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => TabsPage()));
+                      });
                     }
                     return Text(snapshot.data.username);
                   } else if (snapshot.hasError) {

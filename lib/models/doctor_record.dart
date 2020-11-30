@@ -7,16 +7,11 @@ class DoctorRecord {
   final String about;
   final User user;
 
-  DoctorRecord({
-    this.id,
-    this.certificate,
-    this.speciality,
-    this.about,
-    this.user
-  });
+  DoctorRecord(
+      {this.id, this.certificate, this.speciality, this.about, this.user});
 
   factory DoctorRecord.fromJson(Map<String, dynamic> json) {
-    return DoctorRecord(  
+    return DoctorRecord(
         id: json['_id'],
         certificate: json['certificate'],
         about: json['about'],

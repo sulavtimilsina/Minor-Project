@@ -11,11 +11,12 @@ import 'package:http/http.dart' as http;
 Future<List<DoctorRecord>> fetchDoctors() async {
   final storage = new FlutterSecureStorage();
   String value = await storage.read(key: "x-auth-token");
-  final response = await http
-      .get('http://10.0.2.2:3000/doctorRouter/speciality', headers: <String, String>{
-    'Content-Type': 'application/json; charset=UTF-8',
-    HttpHeaders.authorizationHeader: value
-  });
+  final response = await http.get(
+      'http://10.0.2.2:3000/doctorRouter/speciality',
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        HttpHeaders.authorizationHeader: value
+      });
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
@@ -54,7 +55,7 @@ class _DoctorsState extends State<Doctors> {
       appBar: AppBar(
         title: Text('Doctors'),
       ),
-          body: Container(
+      body: Container(
         child: FutureBuilder<List<DoctorRecord>>(
           future: fetchDoctor,
           builder: (context, snapshot) {
@@ -66,11 +67,11 @@ class _DoctorsState extends State<Doctors> {
                   itemBuilder: (BuildContext context, int index) {
                     print(snapshot.data[index].about);
                     return DoctorContainer(
-                      username:snapshot.data[index].user.username,
-                      speciality:snapshot.data[index].speciality,
+                      username: snapshot.data[index].user.username,
+                      speciality: snapshot.data[index].speciality,
                       about: snapshot.data[index].about,
                       certificate: snapshot.data[index].certificate,
-                      );
+                    );
                   });
             } else if (snapshot.hasError) {
               return Text("${snapshot.error}");

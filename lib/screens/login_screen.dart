@@ -5,7 +5,7 @@ import 'dart:convert';
 import './register_screen.dart';
 import '../models/user_model.dart';
 import 'package:http/http.dart' as http;
-import './patient/home_screen.dart';
+import './patient/patient_tabs.dart';
 //import 'doctor/tabs.dart';
 
 Future<User> createUser(String email, String password) async {
@@ -222,7 +222,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => PatientHome()));
+                                builder: (context) => PatientTabsPage()));
                       });
                     } else {
                       Future.delayed(Duration.zero, () {

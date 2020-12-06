@@ -1,13 +1,10 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:helloflutter/screens/doctor/information_screen.dart';
-
 import '../models/user_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:group_radio_button/group_radio_button.dart';
-
 import './patient/home_screen.dart';
 
 Future<User> createUser(
@@ -28,7 +25,6 @@ Future<User> createUser(
 
   if (response.statusCode == 200) {
     print(response.headers['x-auth-token']);
-
     final storage = new FlutterSecureStorage();
     await storage.write(
         key: "x-auth-token", value: response.headers['x-auth-token']);

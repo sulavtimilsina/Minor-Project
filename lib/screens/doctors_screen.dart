@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
-import 'file:///D:/flutterdevlopment/flutter_ui/lib/components/doctor_container.dart';
-import 'package:flutter_ui/constants.dart';
+
+import 'package:helloflutter/constants.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import '../components/catagories_container.dart';
-import 'package:flutter_ui/models/doctor_model.dart';
+import 'package:helloflutter/models/doctor_model.dart';
 
 
 /// THIS PAGE DISPLAYS ALL THE AVAILABLE DOCTORS THAT ARE IN OUR DATABASE

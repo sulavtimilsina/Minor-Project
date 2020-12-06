@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_ui/constants.dart';
-import 'package:flutter_ui/components/rounded_button.dart';
+import 'package:helloflutter/constants.dart';
+import 'package:helloflutter/components/rounded_button.dart';
 
 class DoctorsDetailsScreen extends StatefulWidget {
   final int id;

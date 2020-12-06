@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../screens/registration_screen.dart';
-import 'package:flutter_ui/constants.dart';
-import 'package:flutter_ui/screens/doctor_details.dart';
+import 'package:helloflutter/screens/doctor_details.dart';
+import 'package:helloflutter/constants.dart';
 
 /// BUILD A CARD WIDGET TO SHOW ALL THE DOCTORS
 

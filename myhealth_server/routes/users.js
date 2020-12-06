@@ -4,9 +4,8 @@ const bcrypt = require("bcrypt");
 const { User, validate } = require("../models/user");
 const Joi = require('@hapi/joi');
 const auth = require('../middleware/auth');
-
-
 var multer = require('multer');
+
 const storage = multer.diskStorage({
     destination:function(req,file,cb) {
       console.log(file);
@@ -28,7 +27,6 @@ router.get('/', async (req, res, next)=> {
 
 //register user
 router.post("/",async (req,res,next)=>{
-  
 
   //validate the request body first
   const {error} = validate(req.body);

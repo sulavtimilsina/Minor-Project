@@ -3,6 +3,45 @@ import 'login_screen.dart';
 import '../components/rounded_button.dart';
 import '../constants.dart';
 import 'package:group_button/group_button.dart';
+import 'package:helloflutter/constants.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import '../models/user_model.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:helloflutter/screens/doctor/information_screen.dart';
+import './patient/home_screen.dart';
+
+
+Future<User> createUser(String username ,String email ,String password, String userType) async{
+
+  final http.Response response = await http.post(
+      "http://10.0.2.2:3000/users",
+    headers: <String ,String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+     body: jsonEncode(<String, String>{
+    'username': username,
+    'email': email,
+    'password': password,
+    'userType': userType,
+  }));
+  if (response.statusCode == 200) {
+    print(response.headers['x-auth-token']);
+    final storage = new FlutterSecureStorage();
+    await storage.write(
+        key: "x-auth-token", value: response.headers['x-auth-token']);
+    final user = User.fromJson(jsonDecode(response.body));
+    //print(user.id);
+    return user;
+  } else {
+    //print(response.body);
+    final message = User.fromJson(jsonDecode(response.body));
+    // return message;
+    print(message.message);
+    throw Exception(message.message);
+  }
+}
+
 
 class RegistrationScreen extends StatefulWidget {
   @override
@@ -12,6 +51,16 @@ class RegistrationScreen extends StatefulWidget {
 class _RegistrationScreenState extends State<RegistrationScreen> {
   bool checkedStatus = false;
   final dateController = TextEditingController();
+  final TextEditingController _password = TextEditingController();
+  final TextEditingController _confirmPassword = TextEditingController();
+  final TextEditingController _username = TextEditingController();
+  final TextEditingController _email = TextEditingController();
+  String _userType;
+  List<String> _users = ["patient" ,"doctor"];
+
+  final _formKey = GlobalKey<FormState>();
+  Future<User> _futureUser;
+
 
   @override
   void dispose() {
@@ -22,16 +71,26 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-      body: Container(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: (_futureUser == null)?
+        Form(
+          key: _formKey,
           child: ListView(
             children: <Widget>[
               Container(
-                height: 100.0,
-                child: Image.asset('images/register.jpg'),
-              ),
+               child: Text(
+            "SIGN UP",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 40,
+                      color: Colors.green,
+
+                    ),
+          ),
+                ),
+
               SizedBox(
                 height: 45.0,
               ),
@@ -39,96 +98,128 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 child: GroupButton(
                   isRadio: true,
                   spacing: 20,
-                  onSelected: (index, isSelected) => print('$index button is selected'),
+                  onSelected: (index, isSelected) => _userType = _users[index],
                   buttons: ["Patient" ,"Doctor"],
                 ),
               ),
-              SizedBox(height: 10,),
-              TextField(
-                keyboardType: TextInputType.phone,
-                textAlign: TextAlign.left,
-                onChanged: (value) {
-                  //DO SOMETHING WHEN THE VALE IS CHANGED IN TEXT FIELD
+              SizedBox(height: 15,),
+              TextFormField(
+                validator: (value){
+                  if(value.isEmpty) return "Enter a valid text";
+                  return null;
                 },
+                controller: _email,
+                keyboardType: TextInputType.emailAddress,
                 decoration:
-                    kTextFieldDecoration.copyWith(hintText: "Phone Number*"),
+                kTextFieldDecoration.copyWith(hintText: "Email*"),
               ),
               SizedBox(
                 height: 10,
               ),
-              TextField(
-                readOnly: true,
-                controller: dateController,
+              TextFormField(
+                readOnly: false,
+                validator: (value){
+                  if(value.isEmpty) return "Enter a valid value";
+                  return null;
+                },
+                controller: _username,
                 textAlign: TextAlign.left,
-                onChanged: (value) {
-                  //DO SOMETHING WHEN THE VALE IS CHANGED IN TEXT FIELD
-                },
-                onTap: () async {
-                  var date = await showDatePicker(
-                    context: context,
-                    initialDate: DateTime.now(),
-                    firstDate: DateTime(1900),
-                    lastDate: DateTime(2100),
-                  );
-                  dateController.text = date.toString().substring(0, 10);
-                },
+                ///for date conttroller
+                /// // controller: dateController,
+                // onTap: () async {
+                //   var date = await showDatePicker(
+                //     context: context,
+                //     initialDate: DateTime.now(),
+                //     firstDate: DateTime(1900),
+                //     lastDate: DateTime(2100),
+                //   );
+                //   dateController.text = date.toString().substring(0, 10);
+                // },
                 decoration:
-                    kTextFieldDecoration.copyWith(hintText: "Date of Birth*"),
+                kTextFieldDecoration.copyWith(hintText: "Username*"),
               ),
               SizedBox(
                 height: 10,
               ),
-              TextField(
+              TextFormField(
+                controller: _password,
+                validator:(value){
+                  if(value.isEmpty) return "Enter a valid value";
+                  return null;
+                },
                 textAlign: TextAlign.left,
                 obscureText: true,
-                onChanged: (value) {
-                  //DO SOMETHING WHEN THE VALE IS CHANGED IN TEXT FIELD
-                },
                 decoration:
-                    kTextFieldDecoration.copyWith(hintText: "Password*"),
+                kTextFieldDecoration.copyWith(hintText: "Password*"),
               ),
               SizedBox(
                 height: 10,
               ),
-              TextField(
+              TextFormField(
+                controller: _confirmPassword,
+                validator:  (value){
+                  if(value.isEmpty) return "Enter a valid value";
+                  if(value != _password.text) return 'Passwords doesn\'t match';
+                  return null;
+                },
                 textAlign: TextAlign.left,
                 obscureText: true,
-                onChanged: (value) {
-                  //DO SOMETHING WHEN THE VALE IS CHANGED IN TEXT FIELD
-                },
                 decoration: kTextFieldDecoration.copyWith(
                     hintText: " Conform Password*"),
               ),
               SizedBox(
                 height: 10,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Checkbox(
-                    value: checkedStatus,
-                    activeColor: Colors.lightGreen,
-                    onChanged: (value) {
-                      setState(() {
-                        checkedStatus = value;
-                      });
-                    },
+              Center(
+                child: CheckboxListTile(
+                  title: Text(
+                    "I agree to terms and condition ",
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        checkedStatus = !checkedStatus;
-                      });
-                    },
-                    child: Text(
-                      "I agree to terms and condition ",
-                    ),
-                  ),
-                ],
+                  value: checkedStatus,
+                  controlAffinity: ListTileControlAffinity.leading,
+                  subtitle: !checkedStatus
+                      ? Text(
+                    'Required.',
+                    style: TextStyle(color: Colors.red),
+                  ) : null,
+                  activeColor: Colors.lightGreen,
+                  onChanged: (value) {
+                    setState(() {
+                      checkedStatus = value;
+                    });
+                  },
+                ),
               ),
+
               Center(
                 child: RoundedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if(checkedStatus == false) showDialog(
+                      context: context,
+                      builder: (ctx) => AlertDialog(
+                        title: Text("Alert"),
+                        content: Text("You have not accepted terms and conditioni"),
+                        actions: <Widget>[
+                          FlatButton(
+                            onPressed: () {
+                              Navigator.of(ctx).pop();
+                            },
+                            child: Text("Okay"),
+                          ),
+                        ],
+                      ),
+                    );
+                    if (_formKey.currentState.validate()) {
+
+                      setState(() {
+                        _futureUser = createUser(
+                            _username.text,
+                            _email.text,
+                            _password.text,
+                            _userType);
+                      });
+                    }
+                  },
                   colour: Colors.green,
                   title: "Sign Up",
                 ),
@@ -155,7 +246,32 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               ),
             ],
           ),
-        ),
+        ) : FutureBuilder<User>(
+      future: _futureUser,
+      builder: (context, snapshot) {
+    if (snapshot.hasData) {
+    print(snapshot.data.userType);
+    if (snapshot.data.userType == 'patient') {
+    Future.delayed(Duration.zero, () {
+    Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(
+    builder: (context) => PatientHome()));
+    });
+    } else {
+    Future.delayed(Duration.zero, () {
+    Navigator.pushReplacement(context,
+    MaterialPageRoute(builder: (context) => Info()));
+    });
+    }
+    //return Text(snapshot.data.username);
+    } else if (snapshot.hasError) {
+    return Text("${snapshot.error}");
+    }
+
+    return CircularProgressIndicator();
+    },
+    ),
       ),
     );
   }

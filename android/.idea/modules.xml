@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/android.iml" filepath="$PROJECT_DIR$/.idea/modules/android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/android.iml" filepath="$PROJECT_DIR$/.idea/modules/android.iml" group="android" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="android/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-273962524/flutter_plugin_android_lifecycle.iml" filepath="$PROJECT_DIR$/.idea/modules/-273962524/flutter_plugin_android_lifecycle.iml" group="android/flutter_plugin_android_lifecycle" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/842799067/flutter_secure_storage.iml" filepath="$PROJECT_DIR$/.idea/modules/842799067/flutter_secure_storage.iml" group="android/flutter_secure_storage" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/2022442643/image_picker.iml" filepath="$PROJECT_DIR$/.idea/modules/2022442643/image_picker.iml" group="android/image_picker" />
     </modules>
   </component>
 </project>

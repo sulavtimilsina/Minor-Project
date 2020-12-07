@@ -55,6 +55,9 @@ class _DoctorPageState extends State<DoctorPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar:AppBar(
+
+      ) ,
       body: Container(
         child: ListView.builder(
           itemCount: 3,

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'file:///D:/flutterdevlopment/flutter_ui/lib/screens/registration_screen.dart';
+import 'registration_screen.dart';
 import '../components/rounded_button.dart';
 import '../constants.dart';
-
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:helloflutter/screens/doctor/tabs.dart';
 import 'dart:convert';
-import './register_screen.dart';
 import '../models/user_model.dart';
 import 'package:http/http.dart' as http;
 import './patient/patient_tabs.dart';

@@ -19,7 +19,6 @@ class _HomeScreenState extends State<PatientHome> {
   @override
   void initState() {
     super.initState();
-
     specialities = getSpeciality();
   }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:helloflutter/screens/patient/doctor_screen.dart';
 //import 'package:expandable/expandable.dart';
-import '../doctor_screen.dart';
+import 'package:helloflutter/screens/doctors_screen.dart';
 
 class DoctorContainer extends StatelessWidget {
   final String username;

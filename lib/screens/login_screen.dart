@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'registration_screen.dart';
+import '../components/rounded_button.dart';
+import '../constants.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:helloflutter/screens/doctor/tabs.dart';
 import 'dart:convert';
-import './register_screen.dart';
 import '../models/user_model.dart';
 import 'package:http/http.dart' as http;
 import './patient/patient_tabs.dart';
-//import 'doctor/tabs.dart';
 
 Future<User> createUser(String email, String password) async {
   final http.Response response = await http.post(
@@ -39,207 +40,137 @@ Future<User> createUser(String email, String password) async {
 }
 
 class LoginScreen extends StatefulWidget {
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
   Future<User> _futureUser;
-  bool isLoggedin = false;
+  final _formKey = GlobalKey<FormState>();
+  bool isLoggedin = false; ///???????????????????????????????????
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
-      body: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-            gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-          Colors.blue[300],
-          Colors.blue[200],
-          Colors.blue[100],
-        ])),
-        child: (_futureUser == null)
-            ? Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  SizedBox(
-                    height: 60,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Center(
-                          child: Image.asset(
-                            'assets/images/health-insurance.png',
-                            height: 100,
-                            width: 100,
-                          ),
-                        ),
-                      ],
+      body: Padding(
+        padding:EdgeInsets.all(16.0),
+        child: Form(
+          key: _formKey,
+          child: (_futureUser == null) ?
+            ListView(
+              children: <Widget>[
+                Flexible(
+                  child: SizedBox(
+                    child: Image.asset('images/health-insurance.png',
+                    height: 200,
                     ),
                   ),
-                  Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius:
-                              BorderRadius.only(topLeft: Radius.circular(60))),
-                      child: Padding(
-                        padding: EdgeInsets.all(10.0),
-                        child: Column(
-                          children: <Widget>[
-                            Container(
-                              padding: EdgeInsets.all(20),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Column(
-                                children: <Widget>[
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        border: Border(
-                                            bottom: BorderSide(
-                                                color: Colors.grey[200]))),
-                                    child: TextField(
-                                      controller: _email,
-                                      decoration: InputDecoration(
-                                          prefixIcon: Icon(
-                                            Icons.perm_identity,
-                                            color: Colors.white,
-                                          ),
-                                          hintText: 'Email or Phone number',
-                                          hintStyle:
-                                              TextStyle(color: Colors.grey),
-                                          border: InputBorder.none),
-                                    ),
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        border: Border(
-                                            bottom: BorderSide(
-                                                color: Colors.grey[200]))),
-                                    child: TextField(
-                                      controller: _password,
-                                      decoration: InputDecoration(
-                                          prefixIcon: Icon(
-                                            Icons.lock_outline,
-                                            color: Colors.white,
-                                          ),
-                                          hintText: 'Password',
-                                          hintStyle:
-                                              TextStyle(color: Colors.grey),
-                                          border: InputBorder.none),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              height: 25,
-                            ),
-                            Text(
-                              "Forget Password",
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                            SizedBox(
-                              height: 25,
-                            ),
-                            Container(
-                              height: 45,
-                              margin: EdgeInsets.symmetric(horizontal: 40),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50),
-                                  color: Colors.white),
-                              child: Center(
-                                child: FlatButton(
-                                  splashColor: Colors.white,
-                                  onPressed: () {
-                                    setState(() {
-                                      _futureUser = createUser(
-                                        _email.text,
-                                        _password.text,
-                                      );
-                                      //if (isLoggedin == true) {}
-                                    });
-                                  },
-                                  child: Text(
-                                    'Login',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 15.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Container(
-                              height: 45,
-                              margin: EdgeInsets.symmetric(horizontal: 40),
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.white),
-                                  borderRadius: BorderRadius.circular(50),
-                                  color: Colors.blue[400]),
-                              child: Center(
-                                child: FlatButton(
-                                  splashColor: Colors.white,
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              RegisterScreen()),
-                                    );
-                                  },
-                                  child: Text(
-                                    'Create Account',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 15.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              )
-            : FutureBuilder<User>(
-                future: _futureUser,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    if (snapshot.data.userType == 'patient') {
-                      Future.delayed(Duration.zero, () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => PatientTabsPage()));
-                      });
-                    } else {
-                      Future.delayed(Duration.zero, () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => TabsPage()));
-                      });
-                    }
-                    return Text(snapshot.data.username);
-                  } else if (snapshot.hasError) {
-                    return Text("${snapshot.error}");
-                  }
+                ),
+                SizedBox(
+                  height: 50.0,
+                ),
+                TextFormField(
+                  controller: _email,
+                  validator: (value){
+                    if(value.isEmpty) return "Cannot be empty";
+                    return null;
+                  },
+                  keyboardType: TextInputType.emailAddress,
+                  textAlign: TextAlign.left,
+                  decoration: kTextFieldDecoration.copyWith(hintText: "Email*"),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                TextFormField(
+                  textAlign: TextAlign.left,
+                  obscureText: true,
+                  controller: _password,
+                  validator: (value){
+                    if(value.isEmpty) return "Cannot be empty";
+                    return null;
+                  },
+                  decoration: kTextFieldDecoration.copyWith(hintText: "Password*"),
+                ),
+                Center(
+                  child: RoundedButton(
+                    onPressed: () {
+                      if (_formKey.currentState.validate()) {
+                        setState(() {
+                          _futureUser = createUser(
+                            _email.text,
+                            _password.text,
+                          );
+                          //if (isLoggedin == true) {}
+                        });
+                      }
+                    },
+                    colour: Colors.green,
+                    title: "Sign In",
+                  ),
+                ),
+                Center(
+                  child: GestureDetector(
+                    onTap: (){
+                      /// IMPLLEMENTATION OF FORGOT PASSWORD
+                    },
 
-                  return CircularProgressIndicator();
-                },
-              ),
+                    child: Text(
+                      "Forgot Password"
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
+                Center(
+                  child: GestureDetector(
+                    onTap: (){
+                      Navigator.push(context,MaterialPageRoute(builder: (context){
+                        return RegistrationScreen();
+                      },),);
+                      /// IMPLLEMENTATION OF FORGOT PASSWORD
+                    },
+                    child: Text(
+                        "Sign up instead"
+                    ),
+                  ),
+                ),
+              ],
+            )
+              : FutureBuilder<User>(
+            future: _futureUser,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                if (snapshot.data.userType == 'patient') {
+                  Future.delayed(Duration.zero, () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PatientTabsPage()));
+                  });
+                } else {
+                  Future.delayed(Duration.zero, () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => TabsPage()));
+                  });
+                }
+                return Text(snapshot.data.username);
+              } else if (snapshot.hasError) {
+                return Text("${snapshot.error}");
+              }
+
+              return CircularProgressIndicator();
+            },
+          ),
+        ),
       ),
     );
   }

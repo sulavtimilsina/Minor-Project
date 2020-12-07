@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:helloflutter/screens/registration_screen.dart';
+import 'screens/patient/shop_screen.dart';
+import 'screens/login_screen.dart';
 
-import './screens/login_screen.dart';
 
 void main() => runApp(MyApp());
 

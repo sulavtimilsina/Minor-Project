@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:helloflutter/data/category.dart';
 import 'package:helloflutter/models/category_model.dart';
+import 'package:helloflutter/screens/patient/products_screen.dart';
 
 class ShopScreen extends StatefulWidget {
   static Route<dynamic> route() => MaterialPageRoute(
@@ -62,30 +63,34 @@ class _ShopScreenState extends State<ShopScreen> {
             ),
           ),
         ),
-        
-        SliverPadding(padding: EdgeInsets.all(10),
-        sliver:SliverGrid(
-          
-            delegate:
-                SliverChildBuilderDelegate((BuildContext context, int index) {
-              print(categories[index].name);
-              return Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  //borderRadius: BorderRadius.circular(80.0)
-                ),
-                child: Specialist(
-                    imgAssetPath: categories[index].imgAssetPath,
-                    name: categories[index].name),
-              );
-            }, childCount: categories.length),
-            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 200.0,
-                //mainAxisSpacing: 100.0,
-                //crossAxisSpacing: 10.0,
-                childAspectRatio: (itemWidht / itemHeight))), ),
-
-        
+        SliverPadding(
+          padding: EdgeInsets.all(10),
+          sliver: SliverGrid(
+              delegate:
+                  SliverChildBuilderDelegate((BuildContext context, int index) {
+                print(categories[index].name);
+                return InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Products()));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      //borderRadius: BorderRadius.circular(80.0)
+                    ),
+                    child: Specialist(
+                        imgAssetPath: categories[index].imgAssetPath,
+                        name: categories[index].name),
+                  ),
+                );
+              }, childCount: categories.length),
+              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 200.0,
+                  //mainAxisSpacing: 100.0,
+                  //crossAxisSpacing: 10.0,
+                  childAspectRatio: (itemWidht / itemHeight))),
+        ),
       ]),
     );
   }

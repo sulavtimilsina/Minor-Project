@@ -1,0 +1,28 @@
+extends ../layout
+
+block content
+  .container
+    form(method="POST" action="/products/add" enctype='multipart/form-data')
+        label(for='name') Product name:
+        br
+        input#fname(type='text' name='name')
+        br
+        label(for='price') Price:
+        br
+        input#lname(type='text' name='price')
+        br
+        label(for='features') Features:
+        br
+        input#lname(type='text' name='features')
+        br
+        label(for='details') Details:
+        br
+        textarea(name='details') 
+        br
+        label(for='image') Image:
+        br
+        input#lname(type='file' name='image')
+        br
+        br
+        input.btn.btn-primary(type='submit' value='Submit')
+

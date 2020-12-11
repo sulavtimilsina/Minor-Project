@@ -1,34 +1,31 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
+import 'package:helloflutter/screens/patient/patient_tabs.dart';
+import 'login_screen.dart';
+import '../components/rounded_button.dart';
+import '../constants.dart';
+import 'package:group_button/group_button.dart';
+import 'package:helloflutter/constants.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:helloflutter/screens/doctor/information_screen.dart';
-
 import '../models/user_model.dart';
 import 'package:http/http.dart' as http;
-import 'package:group_radio_button/group_radio_button.dart';
+import 'dart:convert';
+import 'package:helloflutter/screens/doctor/information_screen.dart';
 
-import './patient/home_screen.dart';
 
 Future<User> createUser(
     String username, String email, String password, String userType) async {
-  print(username);
-  print(email);
-  print(userType);
-  final http.Response response = await http.post('http://10.0.2.2:3000/users',
+  final http.Response response = await http.post("http://10.0.2.2:3000/users",
       headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8'
+        'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, String>{
         'username': username,
         'email': email,
         'password': password,
-        'userType': userType
+        'userType': userType,
       }));
-
   if (response.statusCode == 200) {
     print(response.headers['x-auth-token']);
-
     final storage = new FlutterSecureStorage();
     await storage.write(
         key: "x-auth-token", value: response.headers['x-auth-token']);
@@ -44,169 +41,209 @@ Future<User> createUser(
   }
 }
 
-class RegisterScreen extends StatefulWidget {
+class RegistrationScreen extends StatefulWidget {
   @override
-  _RegisterScreenState createState() => _RegisterScreenState();
+  _RegistrationScreenState createState() => _RegistrationScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
-  String _verticalGroupValue = "patient";
-  List<String> _status = ["patient", "doctor"];
-  Future<User> _futureUser;
+class _RegistrationScreenState extends State<RegistrationScreen> {
+  bool checkedStatus = false;
+  final dateController = TextEditingController();
+  final TextEditingController _password = TextEditingController();
+  final TextEditingController _confirmPassword = TextEditingController();
   final TextEditingController _username = TextEditingController();
   final TextEditingController _email = TextEditingController();
-  final TextEditingController _password = TextEditingController();
+  String _userType;
+  List<String> _users = ["patient", "doctor"];
+
+  final _formKey = GlobalKey<FormState>();
+  Future<User> _futureUser;
+
+  @override
+  void dispose() {
+    dateController.dispose(); //Dispose controller when widget removed
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
-      body: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-            gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-          Colors.blue[300],
-          Colors.blue[200],
-          Colors.blue[100],
-        ])),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: (_futureUser == null)
-            ? Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  SizedBox(
-                    height: 60,
-                  ),
-                  Expanded(
-                    child: Container(
-                      child: Padding(
-                        padding: EdgeInsets.all(10.0),
-                        child: Column(
-                          children: <Widget>[
-                            Container(
-                              padding: EdgeInsets.all(10.0),
-                              child: Column(
-                                children: <Widget>[
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        border: Border(
-                                            bottom: BorderSide(
-                                                color: Colors.grey[200]))),
-                                    child: TextField(
-                                      controller: _username,
-                                      decoration: InputDecoration(
-                                          prefixIcon: Icon(
-                                            Icons.perm_identity,
-                                            color: Colors.white,
-                                          ),
-                                          hintText: 'Username',
-                                          hintStyle:
-                                              TextStyle(color: Colors.grey),
-                                          border: InputBorder.none),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 35,
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        border: Border(
-                                            bottom: BorderSide(
-                                                color: Colors.grey[200]))),
-                                    child: TextField(
-                                      controller: _email,
-                                      decoration: InputDecoration(
-                                          prefixIcon: Icon(
-                                            Icons.perm_identity,
-                                            color: Colors.white,
-                                          ),
-                                          hintText: 'Email or Phone number',
-                                          hintStyle:
-                                              TextStyle(color: Colors.grey),
-                                          border: InputBorder.none),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 35,
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        border: Border(
-                                            bottom: BorderSide(
-                                                color: Colors.grey[200]))),
-                                    child: TextField(
-                                      controller: _password,
-                                      decoration: InputDecoration(
-                                          prefixIcon: Icon(
-                                            Icons.lock_outline,
-                                            color: Colors.white,
-                                          ),
-                                          hintText: 'Password',
-                                          hintStyle:
-                                              TextStyle(color: Colors.grey),
-                                          border: InputBorder.none),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Column(
-                              children: <Widget>[
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    RadioGroup<String>.builder(
-                                      direction: Axis.vertical,
-                                      groupValue: _verticalGroupValue,
-                                      onChanged: (value) => setState(() {
-                                        _verticalGroupValue = value;
-                                      }),
-                                      items: _status,
-                                      itemBuilder: (item) => RadioButtonBuilder(
-                                        item,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 45,
-                            ),
-                            Container(
-                              height: 45,
-                              margin: EdgeInsets.symmetric(horizontal: 40),
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.white),
-                                  borderRadius: BorderRadius.circular(50),
-                                  color: Colors.blue[400]),
-                              child: Center(
-                                child: FlatButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      _futureUser = createUser(
-                                          _username.text,
-                                          _email.text,
-                                          _password.text,
-                                          _verticalGroupValue);
-                                    });
-                                    //print(_futureUser);
-                                  },
-                                  child: Text(
-                                    'Create',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 15.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
+            ? Form(
+                key: _formKey,
+                child: ListView(
+                  children: <Widget>[
+                    Container(
+                      child: Text(
+                        "SIGN UP",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 40,
+                          color: Colors.green,
                         ),
                       ),
                     ),
-                  )
-                ],
+                    SizedBox(
+                      height: 45.0,
+                    ),
+                    Center(
+                      child: GroupButton(
+                        isRadio: true,
+                        spacing: 20,
+                        onSelected: (index, isSelected) =>
+                            _userType = _users[index],
+                        buttons: ["Patient", "Doctor"],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    TextFormField(
+                      validator: (value) {
+                        if (value.isEmpty) return "Enter a valid text";
+                        return null;
+                      },
+                      controller: _email,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration:
+                          kTextFieldDecoration.copyWith(hintText: "Email*"),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      readOnly: false,
+                      validator: (value) {
+                        if (value.isEmpty) return "Enter a valid value";
+                        return null;
+                      },
+                      controller: _username,
+                      textAlign: TextAlign.left,
+
+                      ///for date conttroller
+                      /// // controller: dateController,
+                      // onTap: () async {
+                      //   var date = await showDatePicker(
+                      //     context: context,
+                      //     initialDate: DateTime.now(),
+                      //     firstDate: DateTime(1900),
+                      //     lastDate: DateTime(2100),
+                      //   );
+                      //   dateController.text = date.toString().substring(0, 10);
+                      // },
+                      decoration:
+                          kTextFieldDecoration.copyWith(hintText: "Username*"),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      controller: _password,
+                      validator: (value) {
+                        if (value.isEmpty) return "Enter a valid value";
+                        return null;
+                      },
+                      textAlign: TextAlign.left,
+                      obscureText: true,
+                      decoration:
+                          kTextFieldDecoration.copyWith(hintText: "Password*"),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      controller: _confirmPassword,
+                      validator: (value) {
+                        if (value.isEmpty) return "Enter a valid value";
+                        if (value != _password.text)
+                          return 'Passwords doesn\'t match';
+                        return null;
+                      },
+                      textAlign: TextAlign.left,
+                      obscureText: true,
+                      decoration: kTextFieldDecoration.copyWith(
+                          hintText: " Conform Password*"),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Center(
+                      child: CheckboxListTile(
+                        title: Text(
+                          "I agree to terms and condition ",
+                        ),
+                        value: checkedStatus,
+                        controlAffinity: ListTileControlAffinity.leading,
+                        subtitle: !checkedStatus
+                            ? Text(
+                                'Required.',
+                                style: TextStyle(color: Colors.red),
+                              )
+                            : null,
+                        activeColor: Colors.lightGreen,
+                        onChanged: (value) {
+                          setState(() {
+                            checkedStatus = value;
+                          });
+                        },
+                      ),
+                    ),
+                    Center(
+                      child: RoundedButton(
+                        onPressed: () {
+                          if (checkedStatus == false)
+                            showDialog(
+                              context: context,
+                              builder: (ctx) => AlertDialog(
+                                title: Text("Alert"),
+                                content: Text(
+                                    "You have not accepted terms and conditioni"),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    onPressed: () {
+                                      Navigator.of(ctx).pop();
+                                    },
+                                    child: Text("Okay"),
+                                  ),
+                                ],
+                              ),
+                            );
+                          if (_formKey.currentState.validate()) {
+                            setState(() {
+                              _futureUser = createUser(_username.text,
+                                  _email.text, _password.text, _userType);
+                            });
+                          }
+                        },
+                        colour: Colors.green,
+                        title: "Sign Up",
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Center(
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return LoginScreen();
+                              },
+                            ),
+                          );
+
+                          /// IMPLLEMENTATION OF FORGOT PASSWORD
+                        },
+                        child: Text("Sign in instead"),
+                      ),
+                    ),
+                  ],
+                ),
               )
             : FutureBuilder<User>(
                 future: _futureUser,
@@ -218,7 +255,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => PatientHome()));
+                                builder: (context) => PatientTabsPage()));
                       });
                     } else {
                       Future.delayed(Duration.zero, () {

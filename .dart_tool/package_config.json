@@ -74,6 +74,12 @@
       "languageVersion": "2.2"
     },
     {
+      "name": "group_button",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/group_button-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.7"
+    },
+    {
       "name": "group_radio_button",
       "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/group_radio_button-1.0.1",
       "packageUri": "lib/",
@@ -128,6 +134,12 @@
       "languageVersion": "2.0"
     },
     {
+      "name": "nested",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/nested-0.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.2"
+    },
+    {
       "name": "path",
       "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.8.0-nullsafety.1",
       "packageUri": "lib/",
@@ -154,6 +166,12 @@
     {
       "name": "progress_dialog",
       "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/progress_dialog-1.2.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.7"
+    },
+    {
+      "name": "provider",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/provider-4.3.2+3",
       "packageUri": "lib/",
       "languageVersion": "2.7"
     },
@@ -218,7 +236,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2020-12-01T06:14:17.543211Z",
+  "generated": "2020-12-07T14:00:54.509339Z",
   "generator": "pub",
   "generatorVersion": "2.10.3"
 }

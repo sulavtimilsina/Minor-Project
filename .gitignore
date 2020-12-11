@@ -1,1 +1,5 @@
 build/app/outputs/flutter-apk/app.apk
+.dart_tool
+.gradle
+.vscode
+.flutter-plugins

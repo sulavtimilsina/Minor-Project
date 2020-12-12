@@ -2,7 +2,9 @@ import '../models/speciality.dart';
 import 'package:flutter/cupertino.dart';
 
 List<Speciality> getSpeciality() {
+
   List<Speciality> specialities = new List<Speciality>();
+
   Speciality specialityModel = new Speciality();
 
   specialityModel.noOfDoctors = 10;

@@ -1,3 +1,6 @@
+import 'users_model.dart';
+
+
 class Users {
   String id;
   String name;

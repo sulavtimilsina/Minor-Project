@@ -66,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
               children: <Widget>[
                 Flexible(
                   child: SizedBox(
-                    child: Image.asset('images/health-insurance.png',
+                    child: Image.asset('assets/images/health-insurance.png',
                     height: 200,
                     ),
                   ),
@@ -152,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => PatientTabsPage()));
+                            builder: (context) => PatientTabsPage(0)));
                   });
                 } else {
                   Future.delayed(Duration.zero, () {

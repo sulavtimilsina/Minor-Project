@@ -6,6 +6,17 @@ class AppointmentScreen extends StatelessWidget {
       );
   @override
   Widget build(BuildContext context) {
-    return Container(child: Text('Appointment'));
+    return SafeArea(
+      child: Scaffold(
+        body: Center(
+          child: Text(
+            "THIS IS THE APPOINTMENT PAGE",
+            style: TextStyle(
+              fontSize: 50
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

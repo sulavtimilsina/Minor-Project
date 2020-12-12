@@ -35,7 +35,7 @@ Future<List<DoctorRecord>> fetchDoctors() async {
 
 class Doctors extends StatefulWidget {
   final Speciality speciality;
-  Doctors({Key key, @required this.speciality}) : super(key: key);
+  Doctors({Key key,  this.speciality}) : super(key: key);
   @override
   _DoctorsState createState() => _DoctorsState();
 }

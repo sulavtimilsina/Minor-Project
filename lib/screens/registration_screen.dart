@@ -57,7 +57,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final TextEditingController _email = TextEditingController();
   String _userType;
   List<String> _users = ["patient" ,"doctor"];
-
   final _formKey = GlobalKey<FormState>();
   Future<User> _futureUser;
 
@@ -98,7 +97,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 child: GroupButton(
                   isRadio: true,
                   spacing: 20,
-                  onSelected: (index, isSelected) => _userType = _users[index],
+                  onSelected: (index, isSelected) { _userType = _users[index];},
                   buttons: ["Patient" ,"Doctor"],
                 ),
               ),
@@ -256,7 +255,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     Navigator.pushReplacement(
     context,
     MaterialPageRoute(
-    builder: (context) => PatientHome()));
+    builder: (context) => PatientHome(user: _futureUser,)));
     });
     } else {
     Future.delayed(Duration.zero, () {

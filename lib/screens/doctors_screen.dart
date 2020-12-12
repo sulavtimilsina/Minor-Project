@@ -6,6 +6,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import '../components/catagories_container.dart';
+import 'package:helloflutter/components/doctor_container.dart';
 import 'package:helloflutter/models/doctor_model.dart';
 
 
@@ -55,14 +56,14 @@ class _DoctorPageState extends State<DoctorPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:AppBar(
-
-      ) ,
+      // appBar:AppBar(
+      //   leading: ,
+      // ),
       body: Container(
         child: ListView.builder(
-          itemCount: 3,
+          itemCount: doctorInfo.length,
           shrinkWrap: true,
-          itemBuilder: (context, index) => Categories(),
+          itemBuilder: (context, index) => DoctorContainer(id: index),
         ),
       ),
     );

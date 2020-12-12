@@ -11,8 +11,7 @@ class DoctorDetail extends StatelessWidget {
       @required this.username,
       this.speciality,
       this.certificate,
-      this.about})
-      : super(key: key);
+      this.about});
   @override
   Widget build(BuildContext context) {
     // print("This is about");

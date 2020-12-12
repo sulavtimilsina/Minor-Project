@@ -22,7 +22,7 @@ class DoctorContainer extends StatelessWidget {
         ),
       ),
       child: Container(
-        margin:  EdgeInsets.all(16.0),
+        margin:  EdgeInsets.all(9.0),
         padding:  EdgeInsets.all(9.0),
         decoration: BoxDecoration(
           boxShadow: [BoxShadow(
@@ -109,7 +109,7 @@ class DoctorContainer extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .button
-                          .copyWith(color: Colors.green),
+                          .copyWith(color: MyColors.darkGreen),
                     ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5.0),

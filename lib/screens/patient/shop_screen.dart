@@ -62,10 +62,9 @@ class _ShopScreenState extends State<ShopScreen> {
             ),
           ),
         ),
-        
-        SliverPadding(padding: EdgeInsets.all(10),
-        sliver:SliverGrid(
-          
+        SliverPadding(
+          padding: EdgeInsets.all(10),
+          sliver: SliverGrid(
             delegate:
                 SliverChildBuilderDelegate((BuildContext context, int index) {
               print(categories[index].name);
@@ -80,13 +79,15 @@ class _ShopScreenState extends State<ShopScreen> {
               );
             }, childCount: categories.length),
             gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 200.0,
-                //mainAxisSpacing: 100.0,
-                //crossAxisSpacing: 10.0,
-                childAspectRatio: (itemWidht / itemHeight))), ),
-
-        
-      ]),
+              maxCrossAxisExtent: 200.0,
+              //mainAxisSpacing: 100.0,
+              //crossAxisSpacing: 10.0,
+              childAspectRatio: (itemWidht / itemHeight),
+            ),
+          ),
+        ),
+      ],
+      ),
     );
   }
 }

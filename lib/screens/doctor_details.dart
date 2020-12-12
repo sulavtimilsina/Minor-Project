@@ -96,7 +96,7 @@ class _DoctorsDetailsScreenState extends State<DoctorsDetailsScreen> {
                                       Icon(
                                         Icons.location_on,
                                         size: 20,
-                                        color: Colors.grey,
+                                        color:MyColors.orange,
                                       ),
                                       Text(
                                         "${doctorInfo[widget.id].address}",
@@ -124,7 +124,7 @@ class _DoctorsDetailsScreenState extends State<DoctorsDetailsScreen> {
                             ),
                             Container(
                               decoration: BoxDecoration(
-                                color: Colors.lightGreen,
+                                color: MyColors.blue,
                                 borderRadius: BorderRadius.circular(9),
                               ),
                               child: IconButton(
@@ -167,7 +167,7 @@ class _DoctorsDetailsScreenState extends State<DoctorsDetailsScreen> {
                                 style: Theme.of(context)
                                     .textTheme
                                     .button
-                                    .copyWith(color: Colors.blue),
+                                    .copyWith(color: MyColors.blue),
                               ),
                               onPressed: () {
                                 setState(() {
@@ -198,7 +198,7 @@ class _DoctorsDetailsScreenState extends State<DoctorsDetailsScreen> {
                                   style: Theme.of(context)
                                       .textTheme
                                       .button
-                                      .copyWith(color: Colors.green),
+                                      .copyWith(color: MyColors.darkGreen),
                                 ),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(9.0),
@@ -284,7 +284,7 @@ class _DoctorsDetailsScreenState extends State<DoctorsDetailsScreen> {
 
                               ///BOOK AN APPOINTMENT ON PRESSED
                               title: "Make An Appointment",
-                              colour: Colors.green,
+                              colour: MyColors.blue,
                             ),
                           ),
                         ),

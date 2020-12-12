@@ -16,23 +16,54 @@ class _DoctorInfoAddState extends State<DoctorInfoAdd> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          body:
-                        GoogleMap(
-                          mapType: MapType.hybrid,
-                          initialCameraPosition: CameraPosition(
-                            target: LatLng(40.688841, -74.044015),
-                            zoom: 11,
-                          ),
+          body:Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: ListView(
+              children: <Widget>[
+                FormBuilder(
+
+                    child:Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        FormBuilderTextField(
+                          autovalidateMode:AutovalidateMode.onUserInteraction ,
+                          key: _formKey,
+                          name: 'name*',
+                          decoration: kTextFieldDecoration.copyWith(hintText: "Enter your name" ,labelText: "Full Name*"),
+                          // valueTransformer: (text) => num.tryParse(text),
+                          validator: FormBuilderValidators.compose([
+                            FormBuilderValidators.required(context),
+                            FormBuilderValidators.max(context, 50),
+                          ]),
+                          keyboardType: TextInputType.text,
                         ),
-                            )
+                        SizedBox(height: 10,),
+                        FormBuilderDropdown(
+                            name:"gender" ,
+                            autovalidateMode:AutovalidateMode.onUserInteraction ,
+                            decoration: kTextFieldDecoration.copyWith(labelText: "Gender*" ,hintText: "Select your gender",),
+                            items: genderOptions
+                                .map((gender) => DropdownMenuItem(
+                              value: gender,
+                              child: Text("$gender"),
+                            )).toList(),
+                          allowClear: true,
+                          validator: FormBuilderValidators.required(context),
+                        ),
+                        // GoogleMap(
+                        //   mapType: MapType.hybrid,
+                        //   initialCameraPosition: CameraPosition(
+                        //     target: LatLng(40.688841, -74.044015),
+                        //     zoom: 11,
+                        //   ),
+                        // )
+                      ],
+                    ),
+                ),
+              ],
+            ),
+          ),
+      ),
     );
-    //                   ],
-    //                 ),
-    //             ),
-    //           ],
-    //         ),
-    //       ),
-    //   ),
-    // );
   }
 }

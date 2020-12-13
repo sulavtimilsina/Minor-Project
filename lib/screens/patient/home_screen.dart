@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'dart:ui';
 
 class PatientHome extends StatefulWidget {
-    static Route<dynamic> route() => MaterialPageRoute(
+  static Route<dynamic> route() => MaterialPageRoute(
         builder: (context) => PatientHome(),
       );
   @override
@@ -15,15 +15,13 @@ class PatientHome extends StatefulWidget {
 
 class _HomeScreenState extends State<PatientHome> {
   List<Speciality> specialities;
-  
+
   @override
   void initState() {
     super.initState();
 
     specialities = getSpeciality();
   }
-
-
 
   @override
   Widget build(BuildContext context) {

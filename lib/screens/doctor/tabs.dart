@@ -27,6 +27,7 @@ class _TabsPageState extends State<TabsPage> {
               icon: tabItem.icon,
               // ignore: deprecated_member_use
               title: tabItem.title,
+              backgroundColor: Colors.blue
             )
         ],
       ),

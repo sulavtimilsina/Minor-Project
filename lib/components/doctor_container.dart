@@ -5,7 +5,7 @@ import 'package:helloflutter/screens/patient/doctor_details.dart';
 
 /// BUILD A CARD WIDGET TO SHOW ALL THE DOCTORS
 class DoctorContainer extends StatelessWidget {
-  final int id;
+  final String id;
   final String image;
   final String about;
   final String certifications;

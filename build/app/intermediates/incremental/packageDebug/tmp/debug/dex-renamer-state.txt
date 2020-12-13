@@ -1,4 +1,4 @@
-#Thu Dec 10 07:40:47 NPT 2020
+#Sun Dec 13 14:01:54 NPT 2020
 base.0=F\:\\Minor-Project\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

@@ -161,7 +161,7 @@ class _DoctorPageState extends State<AppointmentScreen> {
                 itemCount: doctorInfo.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) => DoctorContainer(
-                  id: index,
+                  //id: doctorInfo[index].id,
                   image: doctorInfo[index].image,
                   certifications: doctorInfo[index].certifications,
                   about: doctorInfo[index].about,

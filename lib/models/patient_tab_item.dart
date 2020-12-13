@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:helloflutter/screens/patient/appointments_screen.dart';
+import 'package:helloflutter/screens/patient/consultation_screen.dart';
 import 'package:helloflutter/screens/patient/home_screen.dart';
+import 'package:helloflutter/screens/patient/prescription_screen.dart';
 import 'package:helloflutter/screens/patient/shop_screen.dart';
 
 class TabNavigationItem {
@@ -31,6 +33,15 @@ class TabNavigationItem {
           icon: Icon(Icons.shop),
           title: Text("Shop"),
         ),
-
+        TabNavigationItem(
+          page: PrescriptionScreen(),
+          icon: Icon(Icons.medical_services_outlined),
+          title: Text("Prescription"),
+        ),
+        TabNavigationItem(
+          page: ConstultaionScreen(),
+          icon: Icon(Icons.chat),
+          title: Text("Prescription"),
+        ),
       ];
 }

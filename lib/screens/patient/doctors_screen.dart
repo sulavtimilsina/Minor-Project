@@ -19,7 +19,7 @@ Future<List<DoctorRecord>> fetchDoctors() async {
       });
 
   if (response.statusCode == 200) {
-    // If the server did return a 200 OK response,
+    // If the server did return a 200 OK response,  
     // then parse the JSON.
     var tagObjsJson = jsonDecode(response.body) as List;
     List<DoctorRecord> tagObjs =
@@ -53,34 +53,67 @@ class _DoctorsState extends State<Doctors> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Doctors'),
+        elevation: 0,
+        backgroundColor: Colors.blueAccent,
+        title: Text("Doctors"),
       ),
-      body: Container(
-        child: FutureBuilder<List<DoctorRecord>>(
-          future: fetchDoctor,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: snapshot.data.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    print(snapshot.data[index].about);
-                    return DoctorContainer(
-                      username: snapshot.data[index].user.username,
-                      speciality: snapshot.data[index].speciality,
-                      about: snapshot.data[index].about,
-                      certificate: snapshot.data[index].certificate,
-                    );
-                  });
-            } else if (snapshot.hasError) {
-              return Text("${snapshot.error}");
-            }
+      body: Column(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+                color: Colors.blueAccent,
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(25),
+                    bottomRight: Radius.circular(25))),
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 0.08,
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.white38),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [Icon(Icons.search), Text("Search")],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Container(
+            height: MediaQuery.of(context).size.height*0.82,
+            child: FutureBuilder<List<DoctorRecord>>(
+              future: fetchDoctor,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        print(snapshot.data[index].about);
+                        return DoctorContainer(
+                          id: snapshot.data[index].user.id,
+                          name: snapshot.data[index].user.username,
+                          speciality: snapshot.data[index].speciality,
+                          about: snapshot.data[index].about,
+                          certifications: snapshot.data[index].certificate,
+                        );
+                      });
+                } else if (snapshot.hasError) {
+                  return Text("${snapshot.error}");
+                }
 
-            // By default, show a loading spinner.
-            return CircularProgressIndicator();
-          },
-        ),
+                // By default, show a loading spinner.
+                return CircularProgressIndicator();
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

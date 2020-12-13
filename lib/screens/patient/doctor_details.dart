@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:helloflutter/constants.dart';
 import 'package:helloflutter/components/rounded_button.dart';
+import 'package:helloflutter/screens/patient/appointmentlist.dart';
+//DoctorsDetailsScreen
 
 class DoctorsDetailsScreen extends StatefulWidget {
-  final int id;
-  DoctorsDetailsScreen({@required this.id});
+  final String id;
+  final String name;
+  final String speciality;
+  final String about;
+  final String certifications;
+  DoctorsDetailsScreen({
+    @required this.id,
+    this.name,
+    this.about,
+    this.certifications,
+    this.speciality,
+  });
   @override
   _DoctorsDetailsScreenState createState() => _DoctorsDetailsScreenState();
 }
@@ -15,6 +26,8 @@ class _DoctorsDetailsScreenState extends State<DoctorsDetailsScreen> {
   ///CONTROLS THE SEE MORE PART OF THE ABOUT SECTION
   @override
   Widget build(BuildContext context) {
+    print("this is id");
+    print(widget.id);
     return SafeArea(
       child: Scaffold(
         body: LayoutBuilder(
@@ -30,7 +43,10 @@ class _DoctorsDetailsScreenState extends State<DoctorsDetailsScreen> {
                   padding: const EdgeInsets.all(15.0),
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: NetworkImage(doctorInfo[widget.id].image),/// BANEKO WIDGET KO ID
+                      image: NetworkImage(
+                          "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/10b3cb41-186f-499b-a824-e369f838b46b/d14pin8-a53f8ce9-49db-4d88-ba03-5813128779b5.jpg/v1/fill/w_719,h_1111,q_75,strp/dr__manhattan_watchmen_series_by_thuddleston.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl0sIm9iaiI6W1t7InBhdGgiOiIvZi8xMGIzY2I0MS0xODZmLTQ5OWItYTgyNC1lMzY5ZjgzOGI0NmIvZDE0cGluOC1hNTNmOGNlOS00OWRiLTRkODgtYmEwMy01ODEzMTI4Nzc5YjUuanBnIiwid2lkdGgiOiI8PTcxOSIsImhlaWdodCI6Ijw9MTExMSJ9XV19.b_Qs8ta95vIP8QUOEXF9poRApWNBwji0LKHNMmVW7vE"),
+
+                      /// BANEKO WIDGET KO ID
                       ///IMAGE OF THE DOCTOR
                       fit: BoxFit.cover,
                     ),
@@ -55,8 +71,8 @@ class _DoctorsDetailsScreenState extends State<DoctorsDetailsScreen> {
               Positioned.fill(
                 child: DraggableScrollableSheet(
                   ///BOTTOM CARD FOR INFORMATION ABOUT DOCTOR
-                  initialChildSize: 2/3,
-                  minChildSize: 2/3,
+                  initialChildSize: 2 / 3,
+                  minChildSize: 2 / 3,
                   maxChildSize: 1,
                   builder: (context, scrollController) => Container(
                     padding: const EdgeInsets.all(15.0),
@@ -84,12 +100,13 @@ class _DoctorsDetailsScreenState extends State<DoctorsDetailsScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Text(
-                                    "${doctorInfo[widget.id].name}",
+                                    widget.name,
                                     style:
                                         Theme.of(context).textTheme.headline4,
                                   ),
                                   Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: <Widget>[
                                       Icon(
                                         Icons.location_on,
@@ -97,16 +114,17 @@ class _DoctorsDetailsScreenState extends State<DoctorsDetailsScreen> {
                                         color: Colors.grey,
                                       ),
                                       Text(
-                                        "${doctorInfo[widget.id].address}",
-                                        style:
-                                        Theme.of(context).textTheme.subtitle2,
+                                        "address",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .subtitle2,
                                       ),
                                     ],
                                   ),
                                   Container(
                                     padding: const EdgeInsets.all(9.0),
                                     child: Text(
-                                        "${doctorInfo[widget.id].speciality}",
+                                      widget.speciality,
                                       style: Theme.of(context)
                                           .textTheme
                                           .button
@@ -138,21 +156,21 @@ class _DoctorsDetailsScreenState extends State<DoctorsDetailsScreen> {
                             SizedBox(width: 15),
                           ],
                         ),
-
                         SizedBox(
                           height: 15,
                         ),
-
                         Text(
                           "About",
                           style: Theme.of(context).textTheme.headline6,
                         ),
-                        SizedBox(height: 10,),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Wrap(
                           /// This is for showing all info about doctor
                           children: <Widget>[
                             Text(
-                              "${doctorInfo[widget.id].about}",
+                              widget.about,
                               maxLines: _showAbout ? null : 1,
 
                               ///if true show all lines if not show one line
@@ -183,7 +201,7 @@ class _DoctorsDetailsScreenState extends State<DoctorsDetailsScreen> {
                         ),
                         Row(
                           children: <Widget>[
-                            Text("${doctorInfo[widget.id].workingHours}"),
+                            Text("workingHours"),
                             SizedBox(width: 15),
                             GestureDetector(
                               onTap: () {},
@@ -207,29 +225,30 @@ class _DoctorsDetailsScreenState extends State<DoctorsDetailsScreen> {
                           ],
                         ),
                         SizedBox(height: 15),
-
                         Text(
-                            "Education",
+                          "Education",
                           style: Theme.of(context).textTheme.headline6,
                         ),
-                        SizedBox(height: 10,),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
-
-                            ListView.builder(
-                              itemCount: doctorInfo[widget.id].education.length,
-                                shrinkWrap: true,
-                                itemBuilder:(BuildContext context ,int index)=>Text(
-                                  doctorInfo[widget.id].education[index],
-                                ),
-                            ),
+                            // ListView.builder(
+                            //   itemCount: doctorInfo[widget.id].education.length,
+                            //     shrinkWrap: true,
+                            //     itemBuilder:(BuildContext context ,int index)=>Text(
+                            //       doctorInfo[widget.id].education[index],
+                            //     ),
+                            // ),
                           ],
                         ),
-                        SizedBox(height: 10,),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Text(
                           "Stats",
-
                           style: Theme.of(context).textTheme.headline6,
                         ),
                         SizedBox(height: 11),
@@ -238,10 +257,9 @@ class _DoctorsDetailsScreenState extends State<DoctorsDetailsScreen> {
                           children: <Widget>[
                             Column(
                               children: <Widget>[
-                                Text(
-                                    "${doctorInfo[widget.id].nmcNumber} ",
+                                Text(".nmcNumber",
                                     style:
-                                    Theme.of(context).textTheme.headline6),
+                                        Theme.of(context).textTheme.headline6),
                                 Text(
                                   "NMC Number",
                                   style: TextStyle(color: Colors.grey),
@@ -250,8 +268,7 @@ class _DoctorsDetailsScreenState extends State<DoctorsDetailsScreen> {
                             ),
                             Column(
                               children: <Widget>[
-                                Text(
-                                    "${doctorInfo[widget.id].experience} Years",
+                                Text("experience Years",
                                     style:
                                         Theme.of(context).textTheme.headline6),
                                 Text(
@@ -262,7 +279,7 @@ class _DoctorsDetailsScreenState extends State<DoctorsDetailsScreen> {
                             ),
                             Column(
                               children: <Widget>[
-                                Text("${doctorInfo[widget.id].certifications}",
+                                Text("certifications",
                                     style:
                                         Theme.of(context).textTheme.headline6),
                                 Text(
@@ -278,7 +295,13 @@ class _DoctorsDetailsScreenState extends State<DoctorsDetailsScreen> {
                           width: double.infinity,
                           child: Center(
                             child: RoundedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            AppointmentList(id: widget.id,)));
+                              },
 
                               ///BOOK AN APPOINTMENT ON PRESSED
                               title: "Make An Appointment",

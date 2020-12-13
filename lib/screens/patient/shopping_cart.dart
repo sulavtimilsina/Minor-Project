@@ -21,10 +21,6 @@ Future<String> shopProduct(List<Product> cart) async {
           body: cart);
   if (response.statusCode == 200) {
     print(response.headers['x-auth-token']);
-
-    final storage = new FlutterSecureStorage();
-    await storage.write(
-        key: "x-auth-token", value: response.headers['x-auth-token']);
     final user = jsonDecode(response.body);
     //print(user.id);
     return user;

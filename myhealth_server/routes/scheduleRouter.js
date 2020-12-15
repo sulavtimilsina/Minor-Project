@@ -4,21 +4,21 @@ const { Schedule } = require('../models/schedule');
 var router = express.Router();
 
 //get all the schedule of specific doctor
-// router.get('/',auth, async(req, res, next)=> {
-//   //extracting current user id using auth middleware
-//   let userId = req.user._id;
-//   //searching record of current user by id
-//   let records = await Schedule.find({doctor:userId});
-//   console.log(records);
-//   res.send(records);
-// });
-
-//get all the schedule of specific doctor
-router.get('/', async(req, res, next)=> {
-  let records = await Schedule.find({}).populate('patient');
+router.get('/',auth, async(req, res, next)=> {
+  //extracting current user id using auth middleware
+  let userId = req.user._id;
+  //searching record of current user by id
+  let records = await Schedule.find({doctor:userId});
   console.log(records);
   res.send(records);
 });
+
+//get all the schedule of specific doctor
+// router.get('/', async(req, res, next)=> {
+//   let records = await Schedule.find({}).populate('patient');
+//   console.log(records);
+//   res.send(records);
+// });
 
 
 //creating schedule by doctor
@@ -38,6 +38,12 @@ router.post('/',auth,async(req,res,next)=>{
     res.send("schedule added");
     
 });
+
+//delete all schedule
+router.delete('/',async(req,res)=>{
+  await Schedule.remove({});
+  res.send(true);
+})
 
 //get appointment of specific doctor
 

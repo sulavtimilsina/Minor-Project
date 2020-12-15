@@ -4,8 +4,15 @@ class Schedule {
   final String startTime;
   final String endTime;
   final String date;
+  final String patient;
 
-  Schedule({this.id, this.doctor, this.startTime, this.endTime, this.date});
+  Schedule(
+      {this.id,
+      this.doctor,
+      this.startTime,
+      this.endTime,
+      this.date,
+      this.patient});
 
   factory Schedule.fromJson(Map<String, dynamic> json) {
     return Schedule(
@@ -13,6 +20,7 @@ class Schedule {
         doctor: json['doctor'],
         startTime: json['startTime'],
         endTime: json['endTime'],
-        date: json['date']);
+        date: json['date'],
+        patient: json['patient']);
   }
 }

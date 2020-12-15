@@ -52,6 +52,9 @@ class _AppointmentListState extends State<AppointmentList> {
 
   @override
   Widget build(BuildContext context) {
+      var size = MediaQuery.of(context).size;
+    final double itemHeight = (size.height - kToolbarHeight - 24) / 1;
+    final double itemWidht = size.width / 2;
     print(widget.id);
     return Scaffold(
       appBar: AppBar(
@@ -71,6 +74,7 @@ class _AppointmentListState extends State<AppointmentList> {
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   crossAxisCount: 2,
+                  childAspectRatio: itemHeight / itemWidht,
                   children: List.generate(snapshot.data.length, (index) {
                     print(snapshot.data[index].date);
                     return Schedules(
@@ -78,6 +82,7 @@ class _AppointmentListState extends State<AppointmentList> {
                       startTime:snapshot.data[index].startTime,
                       endTime:snapshot.data[index].startTime,
                       date:snapshot.data[index].date,
+                      patient:snapshot.data[index].patient
                     );
                   },
                   )

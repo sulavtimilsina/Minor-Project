@@ -26,8 +26,6 @@ class _DoctorsDetailsScreenState extends State<DoctorsDetailsScreen> {
   ///CONTROLS THE SEE MORE PART OF THE ABOUT SECTION
   @override
   Widget build(BuildContext context) {
-    print("this is id");
-    print(widget.id);
     return SafeArea(
       child: Scaffold(
         body: LayoutBuilder(

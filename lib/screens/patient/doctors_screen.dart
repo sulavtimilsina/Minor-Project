@@ -51,6 +51,9 @@ class _DoctorsState extends State<Doctors> {
 
   @override
   Widget build(BuildContext context) {
+        var size = MediaQuery.of(context).size;
+    final double itemHeight = (size.height - kToolbarHeight - 24) / 4.36;
+    final double itemWidht = size.width / 2;
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -90,20 +93,21 @@ class _DoctorsState extends State<Doctors> {
               future: fetchDoctor,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return ListView.builder(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: snapshot.data.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        print(snapshot.data[index].about);
-                        return DoctorContainer(
+                  return GridView.count(
+                      childAspectRatio: itemHeight / itemWidht,
+                      crossAxisCount: 2,
+                      children: List.generate(
+                        snapshot.data.length,
+                        (index) {
+                          return DoctorContainer(
                           id: snapshot.data[index].user.id,
                           name: snapshot.data[index].user.username,
                           speciality: snapshot.data[index].speciality,
                           about: snapshot.data[index].about,
                           certifications: snapshot.data[index].certificate,
-                        );
-                      });
+                        ) ;
+                        },
+                      ));
                 } else if (snapshot.hasError) {
                   return Text("${snapshot.error}");
                 }
@@ -118,3 +122,4 @@ class _DoctorsState extends State<Doctors> {
     );
   }
 }
+

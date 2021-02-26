@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:helloflutter/screens/patient/appointments_screen.dart';
-import 'package:helloflutter/screens/patient/consultation_screen.dart';
+import 'package:helloflutter/screens/patient/sidebar.dart';
+import 'package:helloflutter/screens/chat/consultation_screen.dart';
 import 'package:helloflutter/screens/patient/home_screen.dart';
 import 'package:helloflutter/screens/patient/prescription_screen.dart';
 import 'package:helloflutter/screens/patient/shop_screen.dart';

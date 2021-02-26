@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:helloflutter/screens/doctor/calender.dart';
 import 'package:helloflutter/screens/doctor/consultaioin_screen.dart';
 import 'package:helloflutter/screens/doctor/home_screen.dart';
 import 'package:helloflutter/screens/doctor/schedule_screen.dart';
@@ -32,6 +33,7 @@ class TabNavigationItem {
           icon: Icon(Icons.schedule),
           title: Text("Schedule"),
         ),
+        TabNavigationItem(page: Calender(), title: Text('Calender'), icon:Icon(Icons.calendar_today)),
           TabNavigationItem(
           page: ConstultaionScreen(),
           icon: Icon(Icons.chat_bubble_outline_rounded),

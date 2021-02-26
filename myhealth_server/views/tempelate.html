@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <mate charest="utf-8" />
+        <title>Hello world!</title>
+    </head>
+    <body>
+        <h1>User List</h1>
+        <ul>
+            {{#each users}}
+            <li>Name: {{this.username}}</li>
+            <li>Email: {{this.email}}</li>
+            <li>startTime: {{this.startTime}}</li>
+            <li>endTime: {{this.endTime}}</li>
+            <li>data: {{this.data}}</li>
+            <br>
+        {{/each}}
+        </ul>
+    </body>
+</html>

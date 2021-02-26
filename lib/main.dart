@@ -6,6 +6,13 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: LoginScreen(), debugShowCheckedModeBanner: false);
+    return MaterialApp(
+      // builder: (context, child) => MediaQuery(
+      //   data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+      //   child: child,
+      // ),
+      home: LoginScreen(),
+      debugShowCheckedModeBanner: false,
+    );
   }
 }

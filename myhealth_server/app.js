@@ -10,6 +10,9 @@ var usersRouter = require('./routes/users');
 var doctorRouter = require('./routes/doctorRecords');
 var scheduleRouter = require('./routes/scheduleRouter');
 var productRouter = require('./routes/products');
+var userDataRouter = require('./routes/patientRecords');
+var shopRouter = require('./routes/shopRouter');
+var doctorsPatient = require('./routes/doctorPatientRoute');
 
 
 const cors = require('cors');
@@ -39,6 +42,9 @@ app.use('/users', usersRouter);
 app.use('/doctorRouter',doctorRouter);
 app.use('/schedule',scheduleRouter);
 app.use('/products',productRouter);
+app.use('/userdata',userDataRouter);
+app.use('/shop',shopRouter);
+app.use('/doctorsPatient',doctorsPatient);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

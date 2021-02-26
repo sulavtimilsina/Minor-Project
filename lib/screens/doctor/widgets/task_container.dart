@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 class TaskContainer extends StatelessWidget {
-  final String title;
-  final String subtitle;
+  final String startTime;
+  final String endTime;
+  final String patient;
   final Color boxColor;
 
   TaskContainer({
-    this.title,
-    this.subtitle,
+    this.startTime,
+    this.endTime,
     this.boxColor,
+    this.patient
   });
 
   @override
@@ -18,24 +20,41 @@ class TaskContainer extends StatelessWidget {
       padding: EdgeInsets.all(20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 16.0,
-              fontWeight: FontWeight.w700,
-            ),
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  startTime,
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text('-'),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 10.0),
+                child: Text(
+                  endTime,
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              )
+            ],
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 10.0),
-            child: Text(
-              subtitle,
-              style: TextStyle(
-                fontSize: 14.0,
-                color: Colors.black54,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
+            padding: const EdgeInsets.only(left:10.0),
+            child: Text(patient,style: TextStyle(
+              fontSize: 20.0,fontWeight: FontWeight.bold
+            ),),
           )
         ],
       ),

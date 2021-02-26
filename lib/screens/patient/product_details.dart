@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class ProductDetails extends StatelessWidget {
+  String id;
   String imageUrl;
   String name;
   String price;
@@ -9,10 +10,11 @@ class ProductDetails extends StatelessWidget {
   String features;
 
   ProductDetails(
-      {this.imageUrl, this.name, this.price, this.details, this.features});
+      {this.id,this.imageUrl, this.name, this.price, this.details, this.features});
 
   @override
   Widget build(BuildContext context) {
+    print(imageUrl);
     return Scaffold(
       appBar: AppBar(
         title: Text(name),
@@ -26,7 +28,7 @@ class ProductDetails extends StatelessWidget {
             Container(
                 child: Center(
                     child: Image.network(
-              'http://10.0.2.2:3000/images/$imageUrl',
+              "http://res.cloudinary.com/dlgdqsm81/image/upload/v1614178552/image_t4csk9.jpg",
               height: MediaQuery.of(context).size.height * 0.5,
             ))),
             Divider(

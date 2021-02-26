@@ -1,14 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:helloflutter/screens/doctor/widgets/drawer.dart';
+import 'package:intl/intl.dart';
 import 'dates_list.dart';
 import 'theme/colors/light_colors.dart';
 import 'widgets/calendar_dates.dart';
-import 'widgets/task_container.dart';
+//import 'widgets/task_container.dart';
 import 'create_new_task_page.dart';
-import 'widgets/back_button.dart';
 import 'models/task_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -44,11 +44,17 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   Future<List<Task>> futureAlbum;
 
-  @override
-  void initState() {
-    super.initState();
-    futureAlbum = fetchAlbum();
+  String getDate() {
+    DateTime date = DateTime.now();
+    String formattedDate = DateFormat('yyyy-MM-dd').format(date);
+    return formattedDate;
   }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   futureAlbum = fetchAlbum();
+  // }
 
   // Widget _dashedText() {
   //   return Container(
@@ -66,6 +72,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: LightColors.kLightYellow,
+      appBar: AppBar(
+        title: Text("Schedule"),
+      ),
+      drawer: DrawerWidget(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(
@@ -76,8 +86,7 @@ class _HomePageState extends State<HomePage> {
           ),
           child: Column(
             children: <Widget>[
-              MyBackButton(),
-              SizedBox(height: 30.0),
+              SizedBox(height: 5.0),
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -118,7 +127,7 @@ class _HomePageState extends State<HomePage> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'April, 2020',
+                  getDate(),
                   style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
                 ),
               ),
@@ -139,75 +148,80 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
               ),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 20.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Expanded(
-                          flex: 1,
-                          child: ListView.builder(
-                            itemCount: time.length,
-                            shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            itemBuilder: (BuildContext context, int index) =>
-                                Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 15.0),
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  '${time[index]} ${time[index] > 8 ? 'PM' : 'AM'}',
-                                  style: TextStyle(
-                                    fontSize: 16.0,
-                                    color: Colors.black54,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Expanded(
-                            flex: 5,
-                            child: FutureBuilder<List<Task>>(
-                              future: futureAlbum,
-                              builder: (context, snapshot) {
-                                if (snapshot.hasData) {
-                                  print(snapshot.data);
-                                  return ListView.builder(
-                                      shrinkWrap: true,
-                                      physics: NeverScrollableScrollPhysics(),
-                                      itemCount: snapshot.data.length,
-                                      itemBuilder:
-                                          (BuildContext context, int index) {
-                                        print(snapshot.data[index].startTime);
-                                        return TaskContainer(
-                                          title: snapshot.data[index].startTime,
-                                          subtitle:
-                                              snapshot.data[index].endTime,
-                                          boxColor: LightColors.kLightYellow2,
-                                        );
-                                      });
-                                } else {
-                                  return Expanded(
-                                      child: Text("snapshot.error"));
-                                }
+              // Expanded(
+              //   child: SingleChildScrollView(
+              //     child: Container(
+              //       padding: EdgeInsets.symmetric(vertical: 20.0),
+              //       child: Row(
+              //         crossAxisAlignment: CrossAxisAlignment.start,
+              //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //         children: <Widget>[
+              //           Expanded(
+              //             flex: 1,
+              //             child: ListView.builder(
+              //               itemCount: time.length,
+              //               shrinkWrap: true,
+              //               physics: NeverScrollableScrollPhysics(),
+              //               itemBuilder: (BuildContext context, int index) =>
+              //                   Padding(
+              //                 padding:
+              //                     const EdgeInsets.symmetric(vertical: 15.0),
+              //                 child: Align(
+              //                   alignment: Alignment.centerLeft,
+              //                   child: Text(
+              //                     '${time[index]} ${time[index] > 8 ? 'PM' : 'AM'}',
+              //                     style: TextStyle(
+              //                       fontSize: 16.0,
+              //                       color: Colors.black54,
+              //                     ),
+              //                   ),
+              //                 ),
+              //               ),
+              //             ),
+              //           ),
+              //           SizedBox(
+              //             width: 20,
+              //           ),
+              //           Expanded(
+              //               flex: 5,
+              //               child: FutureBuilder<List<Task>>(
+              //                 future: futureAlbum,
+              //                 builder: (context, snapshot) {
+              //                   if (snapshot.hasData) {
+              //                     return ListView.builder(
+              //                         shrinkWrap: true,
+              //                         physics: NeverScrollableScrollPhysics(),
+              //                         itemCount: snapshot.data.length,
+              //                         itemBuilder:
+              //                             (BuildContext context, int index) {
+              //                           //print(snapshot.data[index].patient.username);
+              //                           return TaskContainer(
+              //                             startTime:
+              //                                 snapshot.data[index].startTime,
+              //                             endTime: snapshot.data[index].endTime,
+              //                             boxColor: LightColors.kLightYellow2,
+              //                             patient:
+              //                                 snapshot.data[index].patient !=
+              //                                         null
+              //                                     ? snapshot.data[index].patient
+              //                                         .username
+              //                                     : 'not booked',
+              //                           );
+              //                         });
+              //                   } else {
+              //                     return Expanded(
+              //                         child: Text("snapshot.error"));
+              //                   }
 
-                                // By default, show a loading spinner.
-                                // return CircularProgressIndicator();
-                              },
-                            ))
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              //                   // By default, show a loading spinner.
+              //                   // return CircularProgressIndicator();
+              //                 },
+              //               ))
+              //         ],
+              //       ),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),

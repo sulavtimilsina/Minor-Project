@@ -62,11 +62,11 @@ class _ProductsState extends State<Products> {
           InkWell(
             onTap: () {
               Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Cart(
-                                    cart: cart,
-                                  )));
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Cart(
+                            cart: cart,
+                          )));
             },
             child: Stack(
               children: [
@@ -126,13 +126,14 @@ class _ProductsState extends State<Products> {
                         children: List.generate(
                           snapshot.data.length,
                           (index) {
-                            print(snapshot.data[index].name);
+                            print(snapshot.data[index].id);
                             return InkWell(
                                 onTap: () {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => ProductDetails(
+                                                id:snapshot.data[index].id,
                                                 imageUrl: snapshot
                                                     .data[index].imageUrl,
                                                 name: snapshot.data[index].name,
@@ -159,7 +160,7 @@ class _ProductsState extends State<Products> {
                                         Container(
                                             child: Center(
                                                 child: Image.network(
-                                                    'http://10.0.2.2:3000/images/${snapshot.data[index].imageUrl}',
+                                                    snapshot.data[index].imageUrl,
                                                     height: 100,
                                                     fit: BoxFit.scaleDown))),
                                         Divider(

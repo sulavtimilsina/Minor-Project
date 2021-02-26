@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:helloflutter/screens/doctor/information_screen.dart';
+import 'package:helloflutter/screens/doctor/widgets/drawer.dart';
 import 'package:helloflutter/screens/login_screen.dart';
 
 class DoctorHome extends StatefulWidget {
@@ -24,20 +25,10 @@ class _DoctorHomeState extends State<DoctorHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: const Icon(Icons.menu),
-              onPressed: () {
-                logout();
-              },
-              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-            );
-          },
-        ),
         title: Text("My Health"),
         actions: [IconButton(icon: Icon(Icons.add_a_photo), onPressed: null)],
       ),
+      drawer: DrawerWidget(),
       body: Column(
         children: [
           Text('You are a doctor'),

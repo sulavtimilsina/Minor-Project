@@ -8,22 +8,25 @@ import 'package:helloflutter/models/products.dart';
 import 'package:helloflutter/screens/patient/widgets/product_container.dart';
 import 'package:http/http.dart' as http;
 
+
 Future<String> shopProduct(List<Product> cart) async {
-  print(cart);
+  String body = jsonEncode(cart);
+  //print(body);
+  //var body = json.encode(items);
   final storage = new FlutterSecureStorage();
   String value = await storage.read(key: "x-auth-token");
   final http.Response response =
-      await http.post('http://10.0.2.2:3000/products/shop',
+      await http.post('http://10.0.2.2:3000/shop',
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
             HttpHeaders.authorizationHeader: value
           },
-          body: cart);
+          body: body);
   if (response.statusCode == 200) {
-    print(response.headers['x-auth-token']);
-    final user = jsonDecode(response.body);
+    //print(response.headers['x-auth-token']);
+    //final user = jsonDecode(response.body);
     //print(user.id);
-    return user;
+    return response.statusCode.toString();
   } else {
     //print(response.body);
     final message = jsonDecode(response.body);
@@ -78,7 +81,7 @@ class Cart extends StatelessWidget {
         ),
         InkWell(
           onTap: () {
-            print(cart);
+            //print(cart);
             shopProduct(cart);
           },
           child: Container(

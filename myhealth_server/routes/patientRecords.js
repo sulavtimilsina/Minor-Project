@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var cloudinary = require('cloudinary');
 
 const auth = require('../middleware/auth');
 const {Record} = require('../models/patientRecord');
@@ -48,6 +49,29 @@ router.delete('/:id',auth,async(req,res,next)=>{
 
     await Record.findByIdAndRemove({_id:recordId});
     res.send('record deleted');
+});
+
+//get user data
+router.get('/mydata',auth,async(req,res,next)=>{
+    let userId = req.user._id;
+    let records = await Record.find({user:userId});
+    console.log(records);
+    res.send(records);
+    
+});
+
+//post user data
+router.post('/mydata',auth,upload.single("dataImage"),async(req,res,next)=>{
+    console.log('your data');
+    let userId = req.user._id;
+
+    let record = new Record({
+        user:userId,
+        image:req.file.filename
+    });
+
+    await record.save();
+    res.send("record added");
 });
 
 module.exports = router;

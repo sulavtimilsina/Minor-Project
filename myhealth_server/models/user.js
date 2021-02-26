@@ -31,6 +31,10 @@ const UserSchema = new mongoose.Schema({
         enum:['patient','doctor'],
         default:'patient'
     },
+    isAdmin:{
+        type:Boolean,
+        default:false
+    }
 },
 {
     timestamps:true

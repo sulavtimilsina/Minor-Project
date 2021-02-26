@@ -3,10 +3,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:helloflutter/screens/patient/pdf_screen.dart';
+
 import 'package:http/http.dart' as http;
 
-Future<int> bookSchedule(String scheduleId) async {
-  print(scheduleId);
+Future<String> bookSchedule(String scheduleId) async {
+  //print(scheduleId);
   final storage = new FlutterSecureStorage();
   String value = await storage.read(key: "x-auth-token");
   final http.Response response =
@@ -18,7 +20,8 @@ Future<int> bookSchedule(String scheduleId) async {
           body: jsonEncode(<String, String>{
             'scheduleId': scheduleId,
           }));
-  return response.statusCode;
+  //print(response.body);
+  return response.body;
 }
 
 class Schedules extends StatefulWidget {
@@ -42,7 +45,7 @@ class Schedules extends StatefulWidget {
 }
 
 class _SchedulesState extends State<Schedules> {
-  Future<int> _bookSchedule;
+  Future<String> _bookSchedule;
   @override
   Widget build(BuildContext context) {
     print("this is patient");
@@ -74,11 +77,19 @@ class _SchedulesState extends State<Schedules> {
         ),
       );
     } else {
-      return FutureBuilder<int>(
+      return FutureBuilder<String>(
         future: _bookSchedule,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            print("booked");
+            //print(snapshot.data);
+            Future.delayed(Duration.zero, () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => PdfPage(
+                            url: snapshot.data,
+                          )));
+            });
           } else {
             print('no data');
           }

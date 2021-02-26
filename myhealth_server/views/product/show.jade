@@ -1,10 +1,19 @@
 extends ../layout
 
 block content
-  .contaier
-  .row
-    .col-md-4
-      a.btn.btn-primary(href='products/add') Add Products
-    .col-md-6
-      | All products
-
+  a.btn.btn-primary(href='/products/add') Add Products
+  .container
+    .row
+      .col-12.col-sm-8.col-lg-5
+        h6.text-muted List Group with Images
+        ul.list-group
+          each product in products
+            li.list-group-item.d-flex.justify-content-between.align-items-center
+              | #{product.name} 
+              | price: #{product.price}
+              .image-parent
+                img.img-fluid(src=product.imageUrl width='200' height='200')
+              form(action='/products/delete',method='POST')
+                input(type="hidden" name='id' value=product.id)
+                input.btn.btn-danger(type='submit' value='Remove')
+              a.btn.btn-info(href='/products/add') Edit

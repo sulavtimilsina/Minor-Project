@@ -7,36 +7,46 @@ class PrescriptionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.blueAccent,
-        leading: Icon(Icons.sort),
-        title: Text('Prescription'),
-      ),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Column(
-          children: [
-                        Container(
-              decoration: BoxDecoration(
-                  color: Colors.blueAccent,
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(25),
-                      bottomRight: Radius.circular(25))),
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.08,
-              child: Center(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            SafeArea(
+              child: Container(
+                color: Colors.blueAccent,
+                width: MediaQuery.of(context).size.width,
                 child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.white38),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [Icon(Icons.search), Text("Search")],
-                      ),
+                  padding: EdgeInsets.only(left: 16,right: 16,top: 10),
+                  child:Text("Prescription",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),
+                    
+                  
+                ),
+              ),
+            ),
+            Container(
+              height: MediaQuery.of(context).size.height * 0.09,
+              decoration: BoxDecoration(
+                color: Colors.blueAccent,
+                borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(25),
+                      bottomRight: Radius.circular(25))
+              ),
+              child: Padding(
+                padding: EdgeInsets.only(top: 16,left: 16,right: 16),
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: "Search...",
+                    //hintStyle: TextStyle(color: Colors.grey.shade400),
+                    prefixIcon: Icon(Icons.search,size: 20,),
+                    filled: true,
+                    fillColor: Colors.white38,
+                    contentPadding: EdgeInsets.all(8),
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        borderSide: BorderSide(
+                            color: Colors.blueAccent
+                        )
                     ),
                   ),
                 ),

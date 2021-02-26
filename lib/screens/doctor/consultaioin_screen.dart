@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:helloflutter/screens/doctor/widgets/drawer.dart';
 
 class ConstultaionScreen extends StatelessWidget {
   static Route<dynamic> route() => MaterialPageRoute(
@@ -10,9 +11,9 @@ class ConstultaionScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.blueAccent,
-        leading: Icon(Icons.sort),
         title: Text('Constultaion'),
       ),
+      drawer: DrawerWidget(),
       body: Container(
         height: MediaQuery.of(context).size.height,
         child: Column(

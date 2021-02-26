@@ -22,7 +22,7 @@ var upload = multer({storage:storage});
 /* GET users listing. */
 router.get('/', async (req, res, next)=> {
   let users =await User.find({});
-  console.log(users);
+  //console.log(users);
   res.send(users);
 });
 
@@ -52,7 +52,7 @@ router.post("/",async (req,res,next)=>{
     });
     //hashing user password using bcrypt
      user.password = await bcrypt.hash(user.password,10);
-     console.log(user);
+     //console.log(user);
   try{
     //saving user object in data base
      await user.save();
@@ -66,7 +66,7 @@ router.post("/",async (req,res,next)=>{
       username: user.username,
       userType:user.userType
     });
-    console.log(token);
+    //console.log(token);
     
   }catch(error){
     res.status(400).json({ 
@@ -102,8 +102,9 @@ router.post('/login', async (req,res,next)=>{
    var validPassword = await bcrypt.compare(req.body.password,user.password)
 
    if(!validPassword) return res.status(400).send("Invalid email or password");
-
+  
    const token = user.generateAuthToken();
+   if(user.isAdmin) res.header("x-auth-token",token).render('product/show');
    res.header("x-auth-token",token).send({
     _id: user._id,
     username: user.username,
@@ -115,16 +116,22 @@ router.post('/login', async (req,res,next)=>{
 //get all the doctors 
 router.get('/doctors',auth, async (req, res, next)=> {
   let userId = req.user._id;
-  console.log(userId);
+  //console.log(userId);
   let users =await User.find({userType:"doctor"});
-  console.log(users);
+  //console.log(users);
   res.send(users);
 });
 router.get('/speciality/:speciality', async (req, res, next)=> {
   let speciality = req.params.speciality;
   let users =await User.find({userType:speciality});
-  console.log(users);
+  //console.log(users);
   res.send(users);
+});
+router.get('/userDetail/:id', async (req, res, next)=> {
+  let userId = req.params.id;
+  let user =await User.findById(userId);
+  //console.log(user);
+  res.send(user);
 });
 
 

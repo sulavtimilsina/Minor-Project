@@ -24,7 +24,7 @@ class _ProductContainerState extends State<ProductContainer> {
           Container(
               child: Center(
                   child: Image.network(
-                      'http://10.0.2.2:3000/images/${widget.product.imageUrl}',
+                      widget.product.imageUrl,
                       height: 100,
                       fit: BoxFit.scaleDown))),
           Divider(

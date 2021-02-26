@@ -2,7 +2,7 @@ import 'package:helloflutter/models/user_model.dart';
 
 class DoctorRecord {
   final String id;
-  final String certificate;
+  final String certificate;   
   final String speciality;
   final String about;
   final User user;

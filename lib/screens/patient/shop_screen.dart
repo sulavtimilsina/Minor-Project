@@ -28,7 +28,7 @@ class _ShopScreenState extends State<ShopScreen> {
     final double itemHeight = (size.height - kToolbarHeight - 24) / 2;
     final double itemWidht = size.width / 2;
     return Scaffold(
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.grey,   
       body: CustomScrollView(slivers: [
         SliverAppBar(
           elevation: 0,
@@ -68,7 +68,7 @@ class _ShopScreenState extends State<ShopScreen> {
           sliver: SliverGrid(
               delegate:
                   SliverChildBuilderDelegate((BuildContext context, int index) {
-                print(categories[index].name);
+                //print(categories[index].name);
                 return InkWell(
                   onTap: () {
                     Navigator.push(context,

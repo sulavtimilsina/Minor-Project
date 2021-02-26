@@ -42,7 +42,7 @@ router.post('/',auth,upload.single("profileImage"),async(req,res,next)=>{
         about:req.body.about
     });
 
-    await record.save();
+    await record.save(); 
     res.send("record added");
     
 });

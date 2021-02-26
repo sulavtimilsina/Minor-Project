@@ -8,7 +8,6 @@ import 'package:helloflutter/screens/doctor/tabs.dart';
 import 'package:intl/intl.dart';
 import 'theme/colors/light_colors.dart';
 import 'widgets/top_container.dart';
-import 'widgets/back_button.dart';
 import 'package:http/http.dart' as http;
 
 Future<int> createSchedule(
@@ -57,9 +56,12 @@ class _CreateNewTaskPageState extends State<CreateNewTaskPage> {
         initialDatePickerMode: DatePickerMode.day,
         firstDate: DateTime(2015),
         lastDate: DateTime(2101));
+
     if (picked != null)
       setState(() {
         selectedDate = picked;
+        //print('This is selected date');
+        //print(selectedDate);
         _date.text = DateFormat.yMd().format(selectedDate);
       });
   }
@@ -72,8 +74,11 @@ class _CreateNewTaskPageState extends State<CreateNewTaskPage> {
     if (picked != null)
       setState(() {
         selectedTime = picked;
+        //print('This is selected time');
+
         _hour = selectedTime.hour.toString();
         _minute = selectedTime.minute.toString();
+        //print(_hour);
         _time = _hour + ' : ' + _minute;
         _startTime.text = _time;
       });
@@ -84,6 +89,10 @@ class _CreateNewTaskPageState extends State<CreateNewTaskPage> {
       context: context,
       initialTime: selectedTime,
     );
+    final localizations = MaterialLocalizations.of(context);
+    final formattedTimeOfDay = localizations.formatHour(picked);
+    print("This is formatted time");
+    print(formattedTimeOfDay);
     if (picked != null)
       setState(() {
         selectedTime = picked;
@@ -97,6 +106,10 @@ class _CreateNewTaskPageState extends State<CreateNewTaskPage> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: LightColors.kDarkYellow,
+        elevation: 0,
+      ),
       body: SafeArea(
         child: (_createSchedule == null)
             ? Column(
@@ -106,10 +119,6 @@ class _CreateNewTaskPageState extends State<CreateNewTaskPage> {
                     width: width,
                     child: Column(
                       children: <Widget>[
-                        MyBackButton(),
-                        SizedBox(
-                          height: 30,
-                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[

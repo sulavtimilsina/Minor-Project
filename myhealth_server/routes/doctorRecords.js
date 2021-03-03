@@ -33,12 +33,23 @@ router.get('/',auth,async(req, res, next)=> {
 router.post('/',auth,upload.single("profileImage"),async(req,res,next)=>{
     let userId = req.user._id;
     console.log(userId);
+    console.log();
     
 
     let record = new Doctor({
         user:userId,
+        fullname:req.body.fullname,
+        education:req.body.eduction,
         certificate:req.file.filename,
         speciality:req.body.speciality,
+        contact:req.body.contact,
+        address:req.body.address,
+        dob:req.body.dob,
+        sex:req.body.sex,
+        blood:req.body.blood,
+        //profileImage:req.body.profileImage,
+        experience:req.body.experience,
+        nmc:req.body.nmc,
         about:req.body.about
     });
 
@@ -69,6 +80,14 @@ router.get('/speciality',auth,async(req, res, next)=> {
     let records = await Doctor.find({}).populate('user');
     console.log(records);
     res.send(records);
+});
+
+router.get('/mydata',auth,async(req,res)=>{
+    let userId = req.user._id;
+    console.log(userId);
+    let result = await Doctor.find({user:userId}).populate('user');
+    console.log(result);
+    res.send(result);
 });
 
 module.exports = router;

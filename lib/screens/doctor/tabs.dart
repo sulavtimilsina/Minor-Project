@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:helloflutter/models/doctor_tabs_item.dart';
 
-class TabsPage extends StatefulWidget {
+class DoctorTabsPage extends StatefulWidget {
   @override
   _TabsPageState createState() => _TabsPageState();
 }
 
-class _TabsPageState extends State<TabsPage> {
+class _TabsPageState extends State<DoctorTabsPage> {
   int _currentIndex = 0;
 
   @override
@@ -34,3 +34,4 @@ class _TabsPageState extends State<TabsPage> {
     );
   }
 }
+

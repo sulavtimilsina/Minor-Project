@@ -61,7 +61,7 @@ class _HomeScreenState extends State<DoctorCategory> {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  Doctors(speciality: specialities[index])),
+                                  Doctors()),
                         );
                       },
                       child: Specialist(

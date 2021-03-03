@@ -2,8 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:helloflutter/models/doctor_record.dart';
-import 'package:helloflutter/models/speciality.dart';
-
 import 'package:flutter/material.dart';
 import 'package:helloflutter/screens/patient/widgets/doctors_container.dart';
 import 'package:http/http.dart' as http;
@@ -34,8 +32,8 @@ Future<List<DoctorRecord>> fetchDoctors() async {
 }
 
 class Doctors extends StatefulWidget {
-  final Speciality speciality;
-  Doctors({Key key, @required this.speciality}) : super(key: key);
+  //final Speciality speciality;
+  //Doctors({Key key, @required this.speciality}) : super(key: key);
   @override
   _DoctorsState createState() => _DoctorsState();
 }

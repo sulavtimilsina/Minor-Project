@@ -302,7 +302,7 @@ class _CreateNewTaskPageState extends State<CreateNewTaskPage> {
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => TabsPage()));
+                                builder: (context) => DoctorTabsPage()));
                       });
                     } else {
                       Future.delayed(Duration.zero, () {

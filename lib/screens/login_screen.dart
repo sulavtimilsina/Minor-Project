@@ -158,7 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => TabsPage()));
+                            builder: (context) => DoctorTabsPage()));
                   });
                 }
                 return Text(snapshot.data.username);

@@ -33,13 +33,8 @@ router.post("/",async (req, res) => {
 });
 
 router.get('/find/:id',auth,async(req,res)=>{
-  let speciality = req.params.id.toString();
-  //let speciality = 'Dermatologist';
-   //console.log(speciality);
-   console.log(speciality);
-   let result =await Doctor.find({speciality:speciality}).populate('user');
+  let result =await Doctor.find({speciality:req.params.id.trim()}).populate('user');
 
-   console.log(result);
    res.send(result);
 
 });

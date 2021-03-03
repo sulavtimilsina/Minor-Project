@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -205,7 +204,8 @@ class _MyDataState extends State<MyData> {
                         margin: EdgeInsets.all(10.0),
                         color: Colors.amber,
                         child: Image.network(
-                          'http://10.0.2.2:3000/images/${snapshot.data[index].imageUrl}',
+                          snapshot.data[index].imageUrl,
+                          //'http://10.0.2.2:3000/images/${snapshot.data[index].imageUrl}',
                           fit: BoxFit.fill,
                         ));
                   },

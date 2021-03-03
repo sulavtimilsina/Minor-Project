@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:helloflutter/data/category.dart';
 import 'package:helloflutter/models/category_model.dart';
+//import 'package:helloflutter/screens/doctor/widgets/drawer.dart';
 import 'package:helloflutter/screens/patient/products_screen.dart';
 
 class ShopScreen extends StatefulWidget {
@@ -28,7 +29,8 @@ class _ShopScreenState extends State<ShopScreen> {
     final double itemHeight = (size.height - kToolbarHeight - 24) / 2;
     final double itemWidht = size.width / 2;
     return Scaffold(
-      backgroundColor: Colors.grey,   
+      //drawer: DrawerWidget(),
+      backgroundColor: Colors.grey,
       body: CustomScrollView(slivers: [
         SliverAppBar(
           elevation: 0,

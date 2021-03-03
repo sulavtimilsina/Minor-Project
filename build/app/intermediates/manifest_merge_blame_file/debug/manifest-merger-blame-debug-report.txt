@@ -118,6 +118,15 @@
 79                android:resource="@xml/flutter_image_picker_file_paths" />
 79-->[:image_picker] F:\Minor-Project\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:18:17-72
 80        </provider>
-81    </application>
-82
-83</manifest>
+81
+82        <activity
+82-->[:url_launcher] F:\Minor-Project\build\url_launcher\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-11:74
+83            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
+83-->[:url_launcher] F:\Minor-Project\build\url_launcher\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-74
+84            android:exported="false"
+84-->[:url_launcher] F:\Minor-Project\build\url_launcher\intermediates\library_manifest\debug\AndroidManifest.xml:10:13-37
+85            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+85-->[:url_launcher] F:\Minor-Project\build\url_launcher\intermediates\library_manifest\debug\AndroidManifest.xml:11:13-71
+86    </application>
+87
+88</manifest>

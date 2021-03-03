@@ -88,6 +88,12 @@ class _SchedulesState extends State<Schedules> {
                   MaterialPageRoute(
                       builder: (context) => PdfPage(
                             url: snapshot.data,
+                            id: widget.id,
+                            startTime: widget.startTime,
+                            endTime: widget.endTime,
+                            patient: widget.patient,
+                            doctor: widget.doctor,
+                            date: widget.date,  
                           )));
             });
           } else {

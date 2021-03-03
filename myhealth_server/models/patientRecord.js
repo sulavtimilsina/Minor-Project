@@ -7,7 +7,7 @@ const RecordSchema = new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'User'
     },
-    image:{
+    imageUrl:{
         type:String,
         required:true
     }

@@ -52,10 +52,6 @@ class _AppointmentListState extends State<ClinicPage> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-    final double itemHeight = (size.height - kToolbarHeight - 24) / 1;
-    final double itemWidht = size.width / 2;
-
     return Scaffold(
       appBar: AppBar(
         elevation: 0,

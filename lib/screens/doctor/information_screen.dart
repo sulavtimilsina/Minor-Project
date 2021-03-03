@@ -174,10 +174,17 @@ class _InfoState extends State<Info> {
                               },
                               items: <String>[
                                 'Speciality',
-                                'Cold and Cough',
-                                'Heart Specialists',
-                                'Diabetes Normd',
-                                'Cold and Corona'
+                                'Dermatologist',
+                                'Infectious Disease Specialist',
+                                'Orthopedic',
+                                'Allergist',
+                                'Endocrinologist',
+                                'Gastroenterologist',
+                                'Cardiologist',
+                                'Neurologist',
+                                'Urologist',
+                                'ENT Specialist',
+                                'Pulmonologist'
                               ].map<DropdownMenuItem<String>>((String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:helloflutter/screens/patient/sidebar.dart';
-import 'package:helloflutter/screens/chat/consultation_screen.dart';
 import 'package:helloflutter/screens/patient/home_screen.dart';
+import 'package:helloflutter/screens/chat/consultation_screen.dart';
+import 'package:helloflutter/screens/patient/doctor_category.dart';
 import 'package:helloflutter/screens/patient/prescription_screen.dart';
 import 'package:helloflutter/screens/patient/shop_screen.dart';
 
@@ -24,9 +24,9 @@ class TabNavigationItem {
           title: Text("Home"),
         ),
         TabNavigationItem(
-          page: PatientHome(),
+          page: DoctorCategory(),
           icon: Icon(Icons.person),
-          title: Text("Appointment"),
+          title: Text("Category"),
         ),
         TabNavigationItem(
           page: ShopScreen(),

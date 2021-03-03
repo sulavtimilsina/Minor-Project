@@ -28,7 +28,7 @@ router.get('/add',(req,res)=>{
   res.render('product/add')
   //res.send(true);
 });
-//
+// 
 router.post('/add',upload.single("image"),async(req,res)=>{
   // console.log(req.body);
   //console.log(req.file.path);

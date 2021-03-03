@@ -64,14 +64,41 @@ router.get('/mydata',auth,async(req,res,next)=>{
 router.post('/mydata',auth,upload.single("dataImage"),async(req,res,next)=>{
     console.log('your data');
     let userId = req.user._id;
+    try{
+        const fileString = req.file.path;
+        //console.log(fileString);
+        const uploadResponse = await cloudinary.uploader.upload(fileString,{
+          upload_preset:'ml_default'
+        });
+        //console.log(uploadResponse);
+        let record = new Record({
+            user:userId,
+            imageUrl:uploadResponse.url
+        });
+        
+      await record.save();
+      res.sendStatus(400);
+      }catch(e){
+        console.log(e);
+        res.sendStatus(400);
+      }
+//for multer only
+//       let record = new Record({
+//         user:userId,
+//         image:req.file.filename
+//     });
+    
+//   await record.save();
+});
 
-    let record = new Record({
-        user:userId,
-        image:req.file.filename
-    });
 
-    await record.save();
-    res.send("record added");
+//get userdata by doctor
+router.get('/showdata/:patientId',auth,async(req,res,next)=>{
+    let userId = req.params.patientId;
+    let records = await Record.find({user:userId});
+    console.log(records);
+    res.send(records);
+    
 });
 
 module.exports = router;

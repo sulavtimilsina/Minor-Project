@@ -19,7 +19,7 @@ Future<List<DoctorRecord>> fetchDoctors() async {
       });
 
   if (response.statusCode == 200) {
-    // If the server did return a 200 OK response,  
+    // If the server did return a 200 OK response,
     // then parse the JSON.
     var tagObjsJson = jsonDecode(response.body) as List;
     List<DoctorRecord> tagObjs =
@@ -51,7 +51,7 @@ class _DoctorsState extends State<Doctors> {
 
   @override
   Widget build(BuildContext context) {
-        var size = MediaQuery.of(context).size;
+    var size = MediaQuery.of(context).size;
     final double itemHeight = (size.height - kToolbarHeight - 24) / 4.36;
     final double itemWidht = size.width / 2;
     return Scaffold(
@@ -88,7 +88,7 @@ class _DoctorsState extends State<Doctors> {
             ),
           ),
           Container(
-            height: MediaQuery.of(context).size.height*0.82,
+            height: MediaQuery.of(context).size.height * 0.82,
             child: FutureBuilder<List<DoctorRecord>>(
               future: fetchDoctor,
               builder: (context, snapshot) {
@@ -100,12 +100,12 @@ class _DoctorsState extends State<Doctors> {
                         snapshot.data.length,
                         (index) {
                           return DoctorContainer(
-                          id: snapshot.data[index].user.id,
-                          name: snapshot.data[index].user.username,
-                          speciality: snapshot.data[index].speciality,
-                          about: snapshot.data[index].about,
-                          certifications: snapshot.data[index].certificate,
-                        ) ;
+                            id: snapshot.data[index].user.id,
+                            name: snapshot.data[index].user.username,
+                            speciality: snapshot.data[index].speciality,
+                            about: snapshot.data[index].about,
+                            certifications: snapshot.data[index].certificate,
+                          );
                         },
                       ));
                 } else if (snapshot.hasError) {
@@ -122,4 +122,3 @@ class _DoctorsState extends State<Doctors> {
     );
   }
 }
-

@@ -130,7 +130,7 @@ router.get('/speciality/:speciality', async (req, res, next)=> {
 router.get('/userDetail/:id', async (req, res, next)=> {
   let userId = req.params.id;
   let user =await User.findById(userId);
-  //console.log(user);
+  //console.log(user); 
   res.send(user);
 });
 

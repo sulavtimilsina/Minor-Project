@@ -22,4 +22,9 @@ router.post('/',auth, async(req, res, next) =>{
     res.sendStatus(200);
   });
 
+  router.delete('/',async(req,res)=>{
+    await DP.remove();
+    res.send(true);
+  });
+
 module.exports = router;

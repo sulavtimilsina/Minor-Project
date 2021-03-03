@@ -4,6 +4,7 @@ class Data {
   Data({this.imageUrl});
 
   factory Data.fromJson(Map<String, dynamic> json) {
-    return Data(imageUrl: json['image']);
+  
+    return Data(imageUrl: json['imageUrl']);
   }
 }

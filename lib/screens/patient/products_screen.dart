@@ -133,7 +133,7 @@ class _ProductsState extends State<Products> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => ProductDetails(
-                                                id:snapshot.data[index].id,
+                                                id: snapshot.data[index].id,
                                                 imageUrl: snapshot
                                                     .data[index].imageUrl,
                                                 name: snapshot.data[index].name,
@@ -160,7 +160,8 @@ class _ProductsState extends State<Products> {
                                         Container(
                                             child: Center(
                                                 child: Image.network(
-                                                    snapshot.data[index].imageUrl,
+                                                    snapshot
+                                                        .data[index].imageUrl,
                                                     height: 100,
                                                     fit: BoxFit.scaleDown))),
                                         Divider(

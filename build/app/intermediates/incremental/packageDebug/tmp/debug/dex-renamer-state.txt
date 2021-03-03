@@ -1,4 +1,4 @@
-#Fri Feb 26 15:26:32 NPT 2021
+#Wed Mar 03 18:40:32 NPT 2021
 base.0=F\:\\Minor-Project\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

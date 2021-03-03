@@ -13,6 +13,9 @@ var productRouter = require('./routes/products');
 var userDataRouter = require('./routes/patientRecords');
 var shopRouter = require('./routes/shopRouter');
 var doctorsPatient = require('./routes/doctorPatientRoute');
+var prescription = require('./routes/prescriptionRoute');
+var speciality = require('./routes/speciality');
+var scriptRoute = require('./routes/scriptRoute');
 
 
 const cors = require('cors');
@@ -45,6 +48,10 @@ app.use('/products',productRouter);
 app.use('/userdata',userDataRouter);
 app.use('/shop',shopRouter);
 app.use('/doctorsPatient',doctorsPatient);
+app.use('/prescription',prescription);
+app.use('/speciality',speciality);
+app.use('/scriptRoute',scriptRoute);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
